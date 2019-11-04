@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Reversi</title>
+	<link href="./css/style.css" rel="stylesheet">
+</head>
+
+<body onload="renderLevel(8);">
+	<div id="main" class="container">
+		<div id="game-board">
+
+		</div>
+		<br>
+		<section>
+			<button onclick="renderLevel(4);">4x4</button>
+			<button onclick="renderLevel(6);">6x6</button>
+			<button onclick="renderLevel(8);">8x8</button>
+			<br>
+			<input type="color" name="board-color" value="#659e65">
+			<br>
+			<input type="color" name="P1-color" value="#FFFFFF">
+			<br>
+			<input type="color" name="P2-color" value="#000000">
+			<br>
+			<button onclick="ChangeBoardColor();">Update</button>
+		</section>
+			
+		
+	</div>
+
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="js/script.js"></script>
+
+</html>
