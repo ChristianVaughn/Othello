@@ -1,5 +1,8 @@
-function renderLevel(tableSize) {
+var gameBoard = []; // A variable to hold a matrix representation of the game board. 
+var boardSize = 8; // board size default to 8, and changes when renderLevel is called.
 
+function renderLevel(tableSize) {
+    boardSize = tableSize;
     var myTable = document.createElement('table');
     myTable.setAttribute('id', 'main-table');
 
@@ -75,3 +78,39 @@ function ChangeBoardColor() {
 
 }
 
+function initBoardArray(tableSize) {
+    for(let i = 0; i < tableSize; i++){
+        gameBoard[i] = [];
+    }
+    for(let i = 0; i < tableSize; i++){
+        for(let j = 0; j < tableSize; j++) {
+            if ((j === tableSize/2 -1 && i === tableSize/2-1) || (j === tableSize/2  && i === tableSize/2)) {
+                gameBoard[i][j] = 2;
+            }
+            else if ((j === tableSize/2 -1 && i === tableSize/2) || (j === tableSize/2  && i === tableSize/2-1)) {
+                gameBoard[i][j] = 1;
+            }
+            else {
+                gameBoard[i][j] = 0;
+            }
+
+        }
+    }
+    console.log(gameBoard);
+    
+}
+
+/*function findMoves(currentPlayer) {
+    for(let i = 0; i < boardSize; i++){
+        for(let j = 0; j < boardSize; j++) {
+            
+    }
+}*/
+
+function gameStart() {
+    var whosTurn = 1;
+    initBoardArray(boardSize);
+  //  findMoves(whosTurn);
+
+
+}
