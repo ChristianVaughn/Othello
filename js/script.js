@@ -88,13 +88,13 @@ function initBoardArray(tableSize) {
     for(let i = 0; i < tableSize; i++){
         for(let j = 0; j < tableSize; j++) {
             if ((j === tableSize/2 -1 && i === tableSize/2-1) || (j === tableSize/2  && i === tableSize/2)) {
-                gameBoard[i][j] = 2;
+                gameBoard[j][i] = 2;
             }
             else if ((j === tableSize/2 -1 && i === tableSize/2) || (j === tableSize/2  && i === tableSize/2-1)) {
-                gameBoard[i][j] = 1;
+                gameBoard[j][i] = 1;
             }
             else {
-                gameBoard[i][j] = 0;
+                gameBoard[j][i] = 0;
             }
 
         }
@@ -128,7 +128,7 @@ function findMovesHelper2(currPlayer,oppPlayer,x,y,dirX,dirY) {
 /*Helper function for findMoves that checks if the next space is in bounds.
  if so one more helper function is called to finish checking. */
 function findMovesHelper(currentPlayer,x,y,dirX,dirY) {
-    var oppositePlayer = (currentPlayer == 1 ? 2 : 1);//Player not making a move
+    var oppositePlayer = (currentPlayer === 1 ? 2 : 1);//Player not making a move
     
     //checking if next position over is out of the board. 
     if((x+dirX < 0)||(x+dirX > boardSize-1)||(y+dirY < 0)||(y+dirY > boardSize-1)){
@@ -151,20 +151,20 @@ function findMoves(currentPlayer) {
             /*if the game board is empty, 
             check all 8 directions to see if 
             there are any possible moves */
-            if (gameBoard[i][j] === 0) {
-               var up = findMovesHelper(currentPlayer,i,j,0,-1);
-               var down = findMovesHelper(currentPlayer,i,j,0,1);
-               var left = findMovesHelper(currentPlayer,i,j,-1,0);
-               var right = findMovesHelper(currentPlayer,i,j,1,0);
-               var uLeft = findMovesHelper(currentPlayer,i,j,-1,-1);
-               var uRight = findMovesHelper(currentPlayer,i,j,1,-1);
-               var dLeft = findMovesHelper(currentPlayer,i,j,-1,1);
-               var dRight = findMovesHelper(currentPlayer,i,j,1,1);
+            if (gameBoard[j][i] === 0) {
+               var up = findMovesHelper(currentPlayer,j,i,0,-1);
+               var down = findMovesHelper(currentPlayer,j,i,0,1);
+               var left = findMovesHelper(currentPlayer,j,i,-1,0);
+               var right = findMovesHelper(currentPlayer,j,i,1,0);
+               var uLeft = findMovesHelper(currentPlayer,j,i,-1,-1);
+               var uRight = findMovesHelper(currentPlayer,j,i,1,-1);
+               var dLeft = findMovesHelper(currentPlayer,j,i,-1,1);
+               var dRight = findMovesHelper(currentPlayer,j,i,1,1);
 
                //If a possible move was found set the current possition on the gameBoard matrix to 3.
                if (up || down || left || right || uLeft || uRight || dLeft || dRight) {
-                   gameBoard[i][j] = 3;
-                   var possCell = document.getElementById(String(i)+String(j));
+                   gameBoard[j][i] = 3;
+                   var possCell = document.getElementById(String(j)+String(i));
                    possCell.setAttribute('class', 'cell playable ');
 
 
@@ -179,6 +179,19 @@ function findMoves(currentPlayer) {
     console.log(gameBoard);
 }
 
+function clearPossibleMoves() {
+    for(let i = 0; i < boardSize; i++){
+        for(let j = 0; j < boardSize; j++) {  
+            if (gameBoard[j][i] === 3) {
+                var possCell = document.getElementById(String(j)+String(i));
+                possCell.setAttribute('class', 'cell empty ');
+                gameBoard[j][i] = 0;
+
+            }
+        }
+    }
+}
+
 /*Helper function for playMove that flips all the discs that make 
 valid moves. */
 function flipLines(currentPlayer,x,y,dirX,dirY) {
@@ -191,18 +204,20 @@ function flipLines(currentPlayer,x,y,dirX,dirY) {
     if(gameBoard[x+dirX][y+dirY] === 0) {
         return false;
     }
+    if(gameBoard[x+dirX][y+dirY] === currentPlayer) {
+        return true;
+    }
     if(gameBoard[x+dirX][y+dirY] === oppositePlayer) {
-        if (currentPlayer,x,y,dirX,dirY){
+        if (flipLines(currentPlayer,x+dirX,y+dirY,dirX,dirY)){
             var setColor = (currentPlayer == 1 ? 'black' : 'white');
-            var currCell = document.getElementById(String(x)+String(y));
+            var currCell = document.getElementById(String(x+dirX)+String(y+dirY));
             currCell.setAttribute('class', 'cell ' + setColor);
+            gameBoard[x+dirX][y+dirY] = whosTurn;
             return true;
         }
         
     }
-    if(gameBoard[x+dirX][y+dirY] === currentPlayer) {
-        return true;
-    }
+    return false;
 }
 function playMove(x,y,cellID) {
     //checking if clicked cell is a possible move.
@@ -220,9 +235,13 @@ function playMove(x,y,cellID) {
        if (up || down || left || right || uLeft || uRight || dLeft || dRight) {
             gameBoard[x][y] = whosTurn; // set clicked cell to players color after switching all other cells
             var clickedCell = document.getElementById(cellID);
-            clickedCell.setAttribute('class', 'cell black ');
+            var setColor = (whosTurn == 1 ? 'black' : 'white');
+            clickedCell.setAttribute('class', 'cell '+ setColor);
+            console.log(gameBoard);
             whosTurn = (whosTurn == 1 ? 2 : 1);//Switch whos turn it is.
-            findMoves(whosTurn);
+            clearPossibleMoves();
+            console.log(gameBoard);
+            //findMoves(whosTurn);
 
                    
                }
