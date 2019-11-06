@@ -77,7 +77,7 @@ function ChangeBoardColor() {
 
 
 }
-
+//A function that takes the empty gameBoard matrix defined in global and initializes it with starting board value based on passed in size.
 function initBoardArray(tableSize) {
     for(let i = 0; i < tableSize; i++){
         gameBoard[i] = [];
@@ -100,20 +100,30 @@ function initBoardArray(tableSize) {
     
 }
 
+//Second and last helper function for finding all Possible moves for a player
 function findMovesHelper2(currPlayer,oppPlayer,x,y,dirX,dirY) {
     console.log(x);
+    //Check if next position is outside the board
     if((x+dirX < 0)||(x+dirX > boardSize)||(y+dirY < 0)||(y+dirY > boardSize)){
         return false;
     }
+    /*Check if next position contains opposing player disk
+    if so call current function again with next position as the X and Y*/
     if(gameBoard[x+dirX][y+dirY] === oppPlayer) {
         return findMovesHelper2(currPlayer,oppPlayer,x+dirX,y+dirY,dirX,dirY);
     }
+
+    /*Check if next position contains current player disk
+    if so return true*/
     if(gameBoard[x+dirX][y+dirY] === currPlayer) {
         return true;
     }
+    //false should be returned at this line if the next space is empty.
     return false;
 }
 
+/*Helper function for findMoves that checks if the next space is in bounds.
+ if so one more helper function is called to finish checking. */
 function findMovesHelper(currentPlayer,x,y,dirX,dirY) {
     var oppositePlayer = (currentPlayer == 1 ? 2 : 1);//Player not making a move
     
@@ -124,15 +134,20 @@ function findMovesHelper(currentPlayer,x,y,dirX,dirY) {
     if(gameBoard[x+dirX][y+dirY] != oppositePlayer) {
         return false;
     }
+    //second helper function to gets called if next position is in bounds, and position contains opposing players piece.
     if(findMovesHelper2(currentPlayer,oppositePlayer,x+dirX,y+dirY,dirX,dirY)) {
         return true;
     }
 
 }
-
+//Move through the whole board to find all possible moves for a player. 
 function findMoves(currentPlayer) {
     for(let i = 0; i < boardSize; i++){
         for(let j = 0; j < boardSize; j++) {
+
+            /*if the game board is empty, 
+            check all 8 directions to see if 
+            there are any possible moves */
             if (gameBoard[i][j] === 0) {
                var up = findMovesHelper(currentPlayer,i,j,0,-1);
                var down = findMovesHelper(currentPlayer,i,j,0,1);
@@ -142,9 +157,13 @@ function findMoves(currentPlayer) {
                var uRight = findMovesHelper(currentPlayer,i,j,1,-1);
                var dLeft = findMovesHelper(currentPlayer,i,j,-1,1);
                var dRight = findMovesHelper(currentPlayer,i,j,1,1);
+
+               //If a possible move was found set the current possition on the gameBoard matrix to 3.
                if (up || down || left || right || uLeft || uRight || dLeft || dRight) {
                    gameBoard[i][j] = 3;
                    console.log("Stupid boy think that I need him.");
+                   //TODO: Add code here to add an indicator on the game board of where possible move is.
+                   
                }
 
             }
