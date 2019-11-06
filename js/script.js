@@ -69,7 +69,7 @@ function renderLevel(tableSize) {
 } 
 
 
-function ChangeBoardColor() {
+/*function ChangeBoardColor() {
     var boardColor = $('[name="board-color"]').val();
     var p1Color = $('[name="P1-color"]').val();
     var p2Color = $('[name="P2-color"]').val();
@@ -77,7 +77,17 @@ function ChangeBoardColor() {
     $("#game-board > table .cell.white > .disc").css("background", p1Color);
     $("#game-board > table .cell.black > .disc").css("background", p2Color);
 
+} */
+function boardColorChange(color) {
+    $("#game-board > table .cell").css("background", color.value);
 
+}
+function p1ColorChange(color) {
+    $("#game-board > table .cell.white > .disc").css("background", color.value);
+
+}
+function p2ColorChange(color) {
+    $("#game-board > table .cell.black > .disc").css("background", color.value);
 
 }
 //A function that takes the empty gameBoard matrix defined in global and initializes it with starting board value based on passed in size.
@@ -166,9 +176,6 @@ function findMoves(currentPlayer) {
                    gameBoard[j][i] = 3;
                    var possCell = document.getElementById(String(j)+String(i));
                    possCell.setAttribute('class', 'cell playable ');
-
-
-                   console.log("Stupid boy think that I need him.");
                    
                }
 
