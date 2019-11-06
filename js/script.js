@@ -28,6 +28,7 @@ function renderLevel(tableSize) {
                 cell.innerHTML = '<span class="disc"></span>';
                 // j = x, i = y
                 cell.setAttribute('class', 'cell empty ');
+                cell.setAttribute('id', String(j) + String(i));
                 cell.setAttribute('onclick', 'clickCell(' + (j + 1) + ',' + (i + 1) + ')');
                 cell.setAttribute('data-x', j + 1);
                 cell.setAttribute('data-y', i + 1);
@@ -143,7 +144,7 @@ function findMovesHelper(currentPlayer,x,y,dirX,dirY) {
 //Move through the whole board to find all possible moves for a player. 
 function findMoves(currentPlayer) {
     for(let i = 0; i < boardSize; i++){
-        for(let j = 0; j < boardSize; j++) {
+        for(let j = 0; j < boardSize; j++) {    
 
             /*if the game board is empty, 
             check all 8 directions to see if 
@@ -161,6 +162,9 @@ function findMoves(currentPlayer) {
                //If a possible move was found set the current possition on the gameBoard matrix to 3.
                if (up || down || left || right || uLeft || uRight || dLeft || dRight) {
                    gameBoard[i][j] = 3;
+                   var possCell = document.getElementById(String(i)+String(j));
+                   possCell.setAttribute('class', 'cell playable ');
+
                    console.log("Stupid boy think that I need him.");
                    //TODO: Add code here to add an indicator on the game board of where possible move is.
                    
