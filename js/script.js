@@ -241,7 +241,7 @@ function playMove(x,y,cellID) {
             whosTurn = (whosTurn == 1 ? 2 : 1);//Switch whos turn it is.
             clearPossibleMoves();
             console.log(gameBoard);
-            //findMoves(whosTurn);
+            findMoves(whosTurn);
 
                    
                }
