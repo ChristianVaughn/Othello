@@ -1,5 +1,7 @@
 var gameBoard = []; // A variable to hold a matrix representation of the game board. 
 var boardSize = 8; // board size default to 8, and changes when renderLevel is called.
+var whosTurn = 1;
+
 
 function renderLevel(tableSize) {
     boardSize = tableSize;
@@ -29,7 +31,7 @@ function renderLevel(tableSize) {
                 // j = x, i = y
                 cell.setAttribute('class', 'cell empty ');
                 cell.setAttribute('id', String(j) + String(i));
-                cell.setAttribute('onclick', 'clickCell(' + (j + 1) + ',' + (i + 1) + ')');
+                cell.setAttribute('onclick', 'playMove(' + (j) + ',' + (i) + ',this.id)');
                 cell.setAttribute('data-x', j + 1);
                 cell.setAttribute('data-y', i + 1);
                 cell.setAttribute('data-clicked', 'false');
@@ -165,8 +167,8 @@ function findMoves(currentPlayer) {
                    var possCell = document.getElementById(String(i)+String(j));
                    possCell.setAttribute('class', 'cell playable ');
 
+
                    console.log("Stupid boy think that I need him.");
-                   //TODO: Add code here to add an indicator on the game board of where possible move is.
                    
                }
 
@@ -177,8 +179,60 @@ function findMoves(currentPlayer) {
     console.log(gameBoard);
 }
 
+/*Helper function for playMove that flips all the discs that make 
+valid moves. */
+function flipLines(currentPlayer,x,y,dirX,dirY) {
+    var oppositePlayer = (currentPlayer == 1 ? 2 : 1);//Player not making a move
+    
+    //checking if next position over is out of the board. 
+    if((x+dirX < 0)||(x+dirX > boardSize-1)||(y+dirY < 0)||(y+dirY > boardSize-1)){
+        return false;
+    }
+    if(gameBoard[x+dirX][y+dirY] === 0) {
+        return false;
+    }
+    if(gameBoard[x+dirX][y+dirY] === oppositePlayer) {
+        if (currentPlayer,x,y,dirX,dirY){
+            var setColor = (currentPlayer == 1 ? 'black' : 'white');
+            var currCell = document.getElementById(String(x)+String(y));
+            currCell.setAttribute('class', 'cell ' + setColor);
+            return true;
+        }
+        
+    }
+    if(gameBoard[x+dirX][y+dirY] === currentPlayer) {
+        return true;
+    }
+}
+function playMove(x,y,cellID) {
+    //checking if clicked cell is a possible move.
+    if (gameBoard[x][y] === 3) {
+        var up = flipLines(whosTurn,x,y,0,-1);
+        var down = flipLines(whosTurn,x,y,0,1);
+       var left = flipLines(whosTurn,x,y,-1,0);
+       var right = flipLines(whosTurn,x,y,1,0);
+       var uLeft = flipLines(whosTurn,x,y,-1,-1);
+       var uRight = flipLines(whosTurn,x,y,1,-1);
+        var dLeft = flipLines(whosTurn,x,y,-1,1);
+       var dRight = flipLines(whosTurn,x,y,1,1);
+
+       //If a possible move was found set the current possition on the gameBoard matrix to 3.
+       if (up || down || left || right || uLeft || uRight || dLeft || dRight) {
+            gameBoard[x][y] = whosTurn; // set clicked cell to players color after switching all other cells
+            var clickedCell = document.getElementById(cellID);
+            clickedCell.setAttribute('class', 'cell black ');
+            whosTurn = (whosTurn == 1 ? 2 : 1);//Switch whos turn it is.
+            findMoves(whosTurn);
+
+                   
+               }
+        
+    }
+
+}
+
 function gameStart() {
-    var whosTurn = 1;
+    whosTurn = 1;
     initBoardArray(boardSize);
     findMoves(whosTurn);
 
