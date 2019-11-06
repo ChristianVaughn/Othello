@@ -100,15 +100,58 @@ function initBoardArray(tableSize) {
     
 }
 
+function findMovesHelper2(currPlayer,oppPlayer,x,y,dirX,dirY) {
+    console.log(x);
+    if((x+dirX < 0)||(x+dirX > boardSize)||(y+dirY < 0)||(y+dirY > boardSize)){
+        return false;
+    }
+    if(gameBoard[x+dirX][y+dirY] === oppPlayer) {
+        return findMovesHelper2(currPlayer,oppPlayer,x+dirX,y+dirY,dirX,dirY);
+    }
+    if(gameBoard[x+dirX][y+dirY] === currPlayer) {
+        return true;
+    }
+    return false;
+}
+
+function findMovesHelper(currentPlayer,x,y,dirX,dirY) {
+    var oppositePlayer = (currentPlayer == 1 ? 2 : 1);//Player not making a move
+    
+    //checking if next position over is out of the board. 
+    if((x+dirX < 0)||(x+dirX > boardSize-1)||(y+dirY < 0)||(y+dirY > boardSize-1)){
+        return false;
+    }
+    if(gameBoard[x+dirX][y+dirY] != oppositePlayer) {
+        return false;
+    }
+    if(findMovesHelper2(currentPlayer,oppositePlayer,x+dirX,y+dirY,dirX,dirY)) {
+        return true;
+    }
+
+}
+
 function findMoves(currentPlayer) {
     for(let i = 0; i < boardSize; i++){
         for(let j = 0; j < boardSize; j++) {
             if (gameBoard[i][j] === 0) {
-                //Insert function here to check all directions of board for valid moves
+               var up = findMovesHelper(currentPlayer,i,j,0,-1);
+               var down = findMovesHelper(currentPlayer,i,j,0,1);
+               var left = findMovesHelper(currentPlayer,i,j,-1,0);
+               var right = findMovesHelper(currentPlayer,i,j,1,0);
+               var uLeft = findMovesHelper(currentPlayer,i,j,-1,-1);
+               var uRight = findMovesHelper(currentPlayer,i,j,1,-1);
+               var dLeft = findMovesHelper(currentPlayer,i,j,-1,1);
+               var dRight = findMovesHelper(currentPlayer,i,j,1,1);
+               if (up || down || left || right || uLeft || uRight || dLeft || dRight) {
+                   gameBoard[i][j] = 3;
+                   console.log("Stupid boy think that I need him.");
+               }
+
             }
         }
             
     }
+    console.log(gameBoard);
 }
 
 function gameStart() {

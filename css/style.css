@@ -53,6 +53,10 @@
 {
   background: #000;
 }
+#game-board > table .cell.playable > .disc
+{
+  background: #F50;
+}
 #game-board > table .cell.attackable > .disc
 {
   opacity: 0.2;
