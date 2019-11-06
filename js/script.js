@@ -100,17 +100,21 @@ function initBoardArray(tableSize) {
     
 }
 
-/*function findMoves(currentPlayer) {
+function findMoves(currentPlayer) {
     for(let i = 0; i < boardSize; i++){
         for(let j = 0; j < boardSize; j++) {
+            if (gameBoard[i][j] === 0) {
+                //Insert function here to check all directions of board for valid moves
+            }
+        }
             
     }
-}*/
+}
 
 function gameStart() {
     var whosTurn = 1;
     initBoardArray(boardSize);
-  //  findMoves(whosTurn);
+    findMoves(whosTurn);
 
 
 }
