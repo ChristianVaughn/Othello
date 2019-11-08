@@ -1,4 +1,4 @@
-var gameBoard = []; // A variable to hold a matrix representation of the game board. 
+var gameBoard = []; // A variable to hold a matrix representation of the game board.
 var boardSize = 8; // board size default to 8, and changes when renderLevel is called.
 var whosTurn = 1;
 
@@ -66,7 +66,7 @@ function renderLevel(tableSize) {
             row.appendChild(cell);
         }
     }
-} 
+}
 
 
 /*function ChangeBoardColor() {
@@ -110,14 +110,14 @@ function initBoardArray(tableSize) {
         }
     }
     console.log(gameBoard);
-    
+
 }
 
 //Second and last helper function for finding all Possible moves for a player
 function findMovesHelper2(currPlayer,oppPlayer,x,y,dirX,dirY) {
     console.log(x);
     //Check if next position is outside the board
-    if((x+dirX < 0)||(x+dirX > boardSize)||(y+dirY < 0)||(y+dirY > boardSize)){
+    if((x+dirX < 0)||(x+dirX >= boardSize)||(y+dirY < 0)||(y+dirY >= boardSize)){
         return false;
     }
     /*Check if next position contains opposing player disk
@@ -139,8 +139,8 @@ function findMovesHelper2(currPlayer,oppPlayer,x,y,dirX,dirY) {
  if so one more helper function is called to finish checking. */
 function findMovesHelper(currentPlayer,x,y,dirX,dirY) {
     var oppositePlayer = (currentPlayer === 1 ? 2 : 1);//Player not making a move
-    
-    //checking if next position over is out of the board. 
+
+    //checking if next position over is out of the board.
     if((x+dirX < 0)||(x+dirX > boardSize-1)||(y+dirY < 0)||(y+dirY > boardSize-1)){
         return false;
     }
@@ -153,13 +153,13 @@ function findMovesHelper(currentPlayer,x,y,dirX,dirY) {
     }
 
 }
-//Move through the whole board to find all possible moves for a player. 
+//Move through the whole board to find all possible moves for a player.
 function findMoves(currentPlayer) {
     for(let i = 0; i < boardSize; i++){
-        for(let j = 0; j < boardSize; j++) {    
+        for(let j = 0; j < boardSize; j++) {
 
-            /*if the game board is empty, 
-            check all 8 directions to see if 
+            /*if the game board is empty,
+            check all 8 directions to see if
             there are any possible moves */
             if (gameBoard[j][i] === 0) {
                var up = findMovesHelper(currentPlayer,j,i,0,-1);
@@ -176,19 +176,19 @@ function findMoves(currentPlayer) {
                    gameBoard[j][i] = 3;
                    var possCell = document.getElementById(String(j)+String(i));
                    possCell.setAttribute('class', 'cell playable ');
-                   
+
                }
 
             }
         }
-            
+
     }
     console.log(gameBoard);
 }
 
 function clearPossibleMoves() {
     for(let i = 0; i < boardSize; i++){
-        for(let j = 0; j < boardSize; j++) {  
+        for(let j = 0; j < boardSize; j++) {
             if (gameBoard[j][i] === 3) {
                 var possCell = document.getElementById(String(j)+String(i));
                 possCell.setAttribute('class', 'cell empty ');
@@ -199,12 +199,12 @@ function clearPossibleMoves() {
     }
 }
 
-/*Helper function for playMove that flips all the discs that make 
+/*Helper function for playMove that flips all the discs that make
 valid moves. */
 function flipLines(currentPlayer,x,y,dirX,dirY) {
     var oppositePlayer = (currentPlayer == 1 ? 2 : 1);//Player not making a move
-    
-    //checking if next position over is out of the board. 
+
+    //checking if next position over is out of the board.
     if((x+dirX < 0)||(x+dirX > boardSize-1)||(y+dirY < 0)||(y+dirY > boardSize-1)){
         return false;
     }
@@ -222,7 +222,7 @@ function flipLines(currentPlayer,x,y,dirX,dirY) {
             gameBoard[x+dirX][y+dirY] = whosTurn;
             return true;
         }
-        
+
     }
     return false;
 }
@@ -250,9 +250,9 @@ function playMove(x,y,cellID) {
             console.log(gameBoard);
             findMoves(whosTurn);
 
-                   
+
                }
-        
+
     }
 
 }
