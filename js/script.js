@@ -1,6 +1,8 @@
 var gameBoard = []; // A variable to hold a matrix representation of the game board.
 var boardSize = 8; // board size default to 8, and changes when renderLevel is called.
 var whosTurn = 1;
+var p1Score = 2;
+var p2Score = 2;
 
 
 function renderLevel(tableSize) {
@@ -225,6 +227,24 @@ function flipLines(currentPlayer,x,y,dirX,dirY) {
 
     }
     return false;
+}
+function updateScore(){
+    p1Score = 0;
+    p2Score = 0;
+    for(let i = 0; i < boardSize; i++) {
+        for(let j = 0; j < boardSize; j++) {
+            if (gameBoard[j][i] === 1) {
+                p1Score++;
+            }
+            else if (gameBoars[j][i] === 2) {
+                p2score++;
+            }
+        
+        }
+    }
+    console.log ("Player 1 Score: " + p1Score);
+    console.log ("Player 2 Score: " + p2Score);
+
 }
 function playMove(x,y,cellID) {
     //checking if clicked cell is a possible move.
