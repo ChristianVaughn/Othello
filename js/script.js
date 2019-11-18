@@ -117,7 +117,7 @@ function initBoardArray(tableSize) {
 
 //Second and last helper function for finding all Possible moves for a player
 function findMovesHelper2(currPlayer,oppPlayer,x,y,dirX,dirY) {
-    console.log(x);
+    //console.log(x);
     //Check if next position is outside the board
     if((x+dirX < 0)||(x+dirX >= boardSize)||(y+dirY < 0)||(y+dirY >= boardSize)){
         return false;
@@ -236,8 +236,8 @@ function updateScore(){
             if (gameBoard[j][i] === 1) {
                 p1Score++;
             }
-            else if (gameBoars[j][i] === 2) {
-                p2score++;
+            else if (gameBoard[j][i] === 2) {
+                p2Score++;
             }
         
         }
@@ -268,6 +268,7 @@ function playMove(x,y,cellID) {
             whosTurn = (whosTurn == 1 ? 2 : 1);//Switch whos turn it is.
             clearPossibleMoves();
             console.log(gameBoard);
+            updateScore();
             findMoves(whosTurn);
 
 
