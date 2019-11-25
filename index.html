@@ -13,18 +13,26 @@
 
 		</div>
 		<br>
-		<section>
+		<section id="game-options">
 			<button onclick="gameStart();">start</button>
 			<br>
 			<button onclick="renderLevel(4);">4x4</button>
 			<button onclick="renderLevel(6);">6x6</button>
 			<button onclick="renderLevel(8);">8x8</button>
 			<br>
+			<select name="cars" onchange="setGameMode(this.value)">
+				<option value="true">Easy CPU Game</option>
+				<option value="true">Hard CPU Game</option>
+				<option value="false">2P Game</option>
+
+			</select>
+			<br>
 			<input type="color" name="board-color" value="#659e65" onchange="boardColorChange(this)">
 			<br>
 			<input type="color" name="P1-color" value="#FFFFFF" onchange="p1ColorChange(this)">
 			<br>
 			<input type="color" name="P2-color" value="#000000" onchange="p2ColorChange(this)">
+			
 		</section>
 
 

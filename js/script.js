@@ -107,6 +107,9 @@ function p2ColorChange(color) {
     $("#game-board > table .cell.black > .disc").css("background", color.value);
 
 }
+function setGameMode(mode) { 
+    cpuEnabled = (mode === "true" ? true : false);//Switch whos turn it is.
+}
 //A function that takes the empty gameBoard matrix defined in global and initializes it with starting board value based on passed in size.
 function initBoardArray(tableSize) {
     for (let i = 0; i < tableSize; i++) {
@@ -312,6 +315,8 @@ function playMove(x, y, cellID) {
 }
 
 function gameStart() {
+    var options = document  .getElementById("game-options");
+    options.style.display = "none";
     whosTurn = 1;
     initBoardArray(boardSize);
     findMoves(whosTurn);
