@@ -1,5 +1,7 @@
 var gameBoard = []; // A variable to hold a matrix representation of the game board.
 var boardSize = 8; // board size default to 8, and changes when renderLevel is called.
+var cpuEnabled = true;
+var cpuColor = 2; //CPU default to player2.
 var whosTurn = 1;
 var p1Score = 2;
 var p2Score = 2;
@@ -70,7 +72,20 @@ function renderLevel(tableSize) {
     }
 }
 
+function cpuRandomMove(){
+    var temparr = [];
+    for (let i = 0; i < boardSize; i++) {
 
+        for (let j = 0; j < boardSize; j++) {
+            if (gameBoard[j][i] === 3) {
+                temparr.push([j,i]);
+            }
+        }
+    }
+    var rand = temparr[Math.floor(Math.random() * temparr.length)];
+    playMove(rand[0],rand[1],""+rand[0]+rand[1]);
+
+}
 /*function ChangeBoardColor() {
     var boardColor = $('[name="board-color"]').val();
     var p1Color = $('[name="P1-color"]').val();
@@ -270,9 +285,10 @@ function playMove(x,y,cellID) {
             console.log(gameBoard);
             updateScore();
             findMoves(whosTurn);
-
-
-               }
+            if(whosTurn === cpuColor && cpuEnabled) {
+               setTimeout(cpuRandomMove,1000);//wait a few seconds before cpu moves
+            }
+        }
 
     }
 
