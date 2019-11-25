@@ -7,7 +7,13 @@
 {
   opacity: 0.5;
 }
-
+#game-board {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -50%);
+}
 #game-board > table
 {
   margin: 0 auto;
@@ -64,4 +70,11 @@
 #game-board > table .cell.attackable:hover > .disc
 {
   opacity: 1.0;
+}
+#game-options {
+  float:left;
+  position: fixed;
+  top: 50%;
+  /* bring your own prefixes */
+  transform: translate(0%, -50%);
 }

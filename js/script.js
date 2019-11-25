@@ -255,6 +255,9 @@ function flipLines(currentPlayer, x, y, dirX, dirY) {
     return false;
 }
 function updateScore() {
+    /*
+    TODO: ADD ELEMENTS TO UPDATE GAME UI
+    */
     p1Score = 0;
     p2Score = 0;
     for (let i = 0; i < boardSize; i++) {
