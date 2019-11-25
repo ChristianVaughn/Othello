@@ -296,13 +296,14 @@ function playMove(x,y,cellID) {
                 whosTurn = (whosTurn == 1 ? 2 : 1);//Switch whos turn it is
                 if(!findMoves(whosTurn)) {
                     console.log("gameover");
+                    alert("Game Over.\nPlease finish programming my end game function.")
                     /*
                     TODO: Add code here to handle ending the game 
                     */
                 }
             }
             if(whosTurn === cpuColor && cpuEnabled) {
-               setTimeout(cpuRandomMove,1000);//wait a few seconds before cpu moves
+               setTimeout(cpuRandomMove,500);//wait a few seconds before cpu moves
             }
         }
 
