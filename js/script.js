@@ -200,7 +200,15 @@ function findMoves(currentPlayer) {
         }
 
     }
-    console.log(gameBoard);
+    var canplay = false; //check if possible move
+    for(let i = 0; i < boardSize; i++) {
+        if(gameBoard[i].includes(3)) {
+            canplay = true; // if a 3 is found there is at least one possible move return true.
+            return true;
+        }
+    }
+    return false;
+    //console.log(gameBoard);
 }
 
 function clearPossibleMoves() {
@@ -284,7 +292,15 @@ function playMove(x,y,cellID) {
             clearPossibleMoves();
             console.log(gameBoard);
             updateScore();
-            findMoves(whosTurn);
+            if(!findMoves(whosTurn)) {
+                whosTurn = (whosTurn == 1 ? 2 : 1);//Switch whos turn it is
+                if(!findMoves(whosTurn)) {
+                    console.log("gameover");
+                    /*
+                    TODO: Add code here to handle ending the game 
+                    */
+                }
+            }
             if(whosTurn === cpuColor && cpuEnabled) {
                setTimeout(cpuRandomMove,1000);//wait a few seconds before cpu moves
             }
