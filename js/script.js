@@ -108,7 +108,7 @@ function p2ColorChange(color) {
 
 }
 function setGameMode(mode) { 
-    cpuEnabled = (mode === "true" ? true : false);//Switch whos turn it is.
+    cpuEnabled = mode;//Switch whos turn it is.
 }
 //A function that takes the empty gameBoard matrix defined in global and initializes it with starting board value based on passed in size.
 function initBoardArray(tableSize) {
