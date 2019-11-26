@@ -28,7 +28,7 @@
 
 #game-board > table .cell
 {
-  background: #659e65;
+  background: #5cb85c;
   border: 1px solid #ccc;
   padding: 0;
   margin: 0;
@@ -154,11 +154,12 @@ input[type="checkbox"].sw2-lg:checked::after {
 
 
 .input-color-container {
+  left:30%;
   position: relative;
   overflow: hidden;
   width: 44px;
   height: 24px;
-border-radius: 30px;
+border-radius: 40px;
 box-shadow: 1px 2px 2px 0px #999;
 
 }
