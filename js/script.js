@@ -318,6 +318,8 @@ function playMove(x, y, cellID) {
 }
 
 function gameStart() {
+     //$('#game-options').toggleClass('open');
+    
     var options = document  .getElementById("game-options");
     options.style.display = "none";
     whosTurn = 1;

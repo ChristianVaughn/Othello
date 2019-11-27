@@ -172,3 +172,22 @@ box-shadow: 1px 2px 2px 0px #999;
   height: 56px;
   border: none;
 }
+#game-options {
+  background-color: rgb(240, 240, 240);
+  padding: 30px;
+  border-radius: 5%;
+}
+
+
+.open{
+  left:-180px !important;
+  
+}
+.transition{
+  
+-webkit-transition: left 5s ease-out;  /* Chrome 1-25, Safari 3.2+ */
+   -moz-transition: left 5s ease-out;  /* Firefox 4-15 */
+     -o-transition: left 5s ease-out;  /* Opera 10.50–12.00 */
+        transition: left 5s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
+
+}
