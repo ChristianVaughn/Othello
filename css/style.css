@@ -62,9 +62,6 @@
 #game-board > table .cell.playable > .disc
 {
   background: #F50;
-}
-#game-board > table .cell.playable > .disc
-{
   opacity: 0.2;
 }
 #game-board > table .cell.playable:hover > .disc
