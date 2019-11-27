@@ -5,6 +5,9 @@ var cpuColor = 2; //CPU default to player2.
 var whosTurn = 1;
 var p1Score = 2;
 var p2Score = 2;
+var p1Color = "#000000"
+var p2Color = "#FFFFFF"
+
 
 
 function renderLevel(tableSize) {
@@ -27,9 +30,6 @@ function renderLevel(tableSize) {
         for (let j = 0; j < tableSize; j++) {
 
             let cell = document.createElement('td');
-            //if ((i !== 0) && (j !== 0)) {
-            //cell.innerHTML = (j-1)+','+(i-1);
-            //cell.innerHTML='<p class="hidden-values">123<p>';
 
             cell.innerHTML = '<span class="disc"></span>';
             // j = x, i = y
@@ -45,28 +45,7 @@ function renderLevel(tableSize) {
             if ((j === tableSize / 2 - 1 && i === tableSize / 2) || (j === tableSize / 2 && i === tableSize / 2 - 1)) {
                 cell.setAttribute('class', 'cell black ');
             }
-            /*} else {
-                if (i === 0 && j === 0) {
-                    cell.innerHTML = '';
-                    //cell.setAttribute('id', 'top-left-cell');
-                } else {
 
-                    if (i === 0) {
-                        let markCountString = markCountCols[j - 1].toString();
-                        markCountString = markCountString.split(/[ ,]+/).join('<br>')
-                        cell.innerHTML = markCountString;
-                        //cell.innerHTML=123;
-                        cell.setAttribute("class", "outside-cell outside-cell-top");
-                    } else {
-
-                        let markCountString = markCountRows[i - 1].toString();
-                        markCountString = markCountString.split(/[ ,]+/).join(' ')
-                        cell.innerHTML = markCountString;
-                        //cell.innerHTML=123;
-                        cell.setAttribute("class", "outside-cell outside-cell-left");
-                    }
-                }
-            }*/
             row.appendChild(cell);
         }
     }
@@ -86,26 +65,19 @@ function cpuRandomMove() {
     playMove(rand[0], rand[1], "" + rand[0] + rand[1]);
 
 }
-/*function ChangeBoardColor() {
-    var boardColor = $('[name="board-color"]').val();
-    var p1Color = $('[name="P1-color"]').val();
-    var p2Color = $('[name="P2-color"]').val();
-    $("#game-board > table .cell").css("background", boardColor);
-    $("#game-board > table .cell.white > .disc").css("background", p1Color);
-    $("#game-board > table .cell.black > .disc").css("background", p2Color);
 
-} */
 function boardColorChange(color) {
     $("#game-board > table .cell").css("background", color.value);
 
 }
 function p1ColorChange(color) {
-    $("#game-board > table .cell.white > .disc").css("background", color.value);
+    p1Color = color;
+    $("#game-board > table .cell.black > .disc").css("background", p1Color);
 
 }
 function p2ColorChange(color) {
-    $("#game-board > table .cell.black > .disc").css("background", color.value);
-
+    p2Color = color;
+    $("#game-board > table .cell.white > .disc").css("background", p2Color);
 }
 function setGameMode(mode) { 
     cpuEnabled = mode;//Switch whos turn it is.
@@ -196,6 +168,12 @@ function findMoves(currentPlayer) {
                     gameBoard[j][i] = 3;
                     var possCell = document.getElementById(String(j) + String(i));
                     possCell.setAttribute('class', 'cell playable ');
+                    if (whosTurn == 1) {
+                        $("#game-board > table .cell.playable > .disc").css("background", p1Color);
+                    }
+                    else {
+                        $("#game-board > table .cell.playable > .disc").css("background", p2Color);
+                    }
 
                 }
 
@@ -292,7 +270,10 @@ function playMove(x, y, cellID) {
             gameBoard[x][y] = whosTurn; // set clicked cell to players color after switching all other cells
             var clickedCell = document.getElementById(cellID);
             var setColor = (whosTurn == 1 ? 'black' : 'white');
+            clickedCell.removeAttribute('class', 'cell playable ');
             clickedCell.setAttribute('class', 'cell ' + setColor);
+            p1ColorChange(p1Color);
+            p2ColorChange(p2Color);
             console.log(gameBoard);
             whosTurn = (whosTurn == 1 ? 2 : 1);//Switch whos turn it is.
             clearPossibleMoves();
@@ -308,6 +289,8 @@ function playMove(x, y, cellID) {
                     */
                 }
             }
+            //(whosTurn == 1 ? $("#game-board > table .cell.playable > .disc").css("background", p1Color) :$("#game-board > table .cell.playable > .disc").css("background", p2Color))
+
             if (whosTurn === cpuColor && cpuEnabled) {
                 setTimeout(cpuRandomMove, 500);//wait a few seconds before cpu moves
             }

@@ -63,11 +63,11 @@
 {
   background: #F50;
 }
-#game-board > table .cell.attackable > .disc
+#game-board > table .cell.playable > .disc
 {
   opacity: 0.2;
 }
-#game-board > table .cell.attackable:hover > .disc
+#game-board > table .cell.playable:hover > .disc
 {
   opacity: 1.0;
 }
