@@ -1,6 +1,10 @@
+@import url("https://fonts.googleapis.com/css?family=Lato");
+
+
 body {
   margin:0;
   font-family: Arial, Helvetica, sans-serif;
+  color: #FFF;
 
 }
 
@@ -182,7 +186,7 @@ box-shadow: 1px 2px 2px 0px #999;
   border: none;
 }
 #game-options {
-  background-color: rgb(240, 240, 240);
+  background-color: #f0f0f0;
   padding: 30px;
   border-radius: 5%;
 }
@@ -233,4 +237,28 @@ li a:hover:not(.active) {
 .active {
   background-color: #5CB85C;
   border-radius: 0.25em;
+}
+
+.scoreboard {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 600px;
+  height: 100px;
+  background: #5CB85C;
+  color: #f0f0f0;
+  align-items: center;
+  border-radius: 8px;
+  position: fixed;
+  top: 100%;
+  left: 50%;
+  /* bring your own prefixes */
+  transform: translate(-50%, -100%);
+}
+.scoreboard .block {
+  text-align: center;
+  height: 100%;
+  width: 100px;
+   font-size: 32px;
+  font-weight: bold;
 }

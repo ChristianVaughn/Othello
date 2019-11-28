@@ -9,7 +9,6 @@ var p1Color = "#000000"
 var p2Color = "#FFFFFF"
 
 
-
 function renderLevel(tableSize) {
     boardSize = tableSize;
     var myTable = document.createElement('table');
@@ -249,6 +248,8 @@ function updateScore() {
 
         }
     }
+    document.getElementById("p1Score").innerText = p1Score;
+    document.getElementById("p2Score").innerText = p2Score;
     console.log("Player 1 Score: " + p1Score);
     console.log("Player 2 Score: " + p2Score);
 
