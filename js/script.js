@@ -55,18 +55,21 @@ function countLines(x, y, dirX, dirY) {
 
     //checking if next position over is out of the board.
     if ((x + dirX < 0) || (x + dirX > boardSize - 1) || (y + dirY < 0) || (y + dirY > boardSize - 1)) {
-        return 0;
+        return [0,false];
     }
     if (gameBoard[x + dirX][y + dirY] === 0) {
-        return 0;
+        return [0,false];
     }
     if (gameBoard[x + dirX][y + dirY] === whosTurn) {
-        return 0;
+        return [0,true];
     }
     if (gameBoard[x + dirX][y + dirY] === oppositePlayer) {
-            return 1+(countLines(x + dirX, y + dirY, dirX, dirY));
+         var recur = countLines(x + dirX, y + dirY, dirX, dirY);
+        if (recur[1]) {
+            return [recur[0]+1,true];
+        }
     }
-    return 0; //Without this one of the countLines function calls returns undefined for every single 
+    return [0,false]; //Without this one of the countLines function calls returns undefined for every single 
 }
 
 function countMaxFlips(x, y) {
@@ -81,16 +84,9 @@ function countMaxFlips(x, y) {
         var dLeft = countLines(x, y, -1, 1);
         var dRight = countLines(x, y, 1, 1);
 
-        console.log(up);
-        console.log(down);
-        console.log(left);
-        console.log(right);
-        console.log(uLeft);
-        console.log(uRight);
-        console.log(dLeft);
-        console.log(dRight);
 
-        var retVal = up+down+left+right+uLeft+uRight+dLeft+dRight;
+
+        var retVal = up[0]+down[0]+left[0]+right[0]+uLeft[0]+uRight[0]+dLeft[0]+dRight[0];
         return retVal;
         
     }
@@ -98,30 +94,33 @@ function countMaxFlips(x, y) {
 }
 
 function cpuRandomMove() {
-    var temparr = [];
+    var possMoves = [];
     for (let i = 0; i < boardSize; i++) {
 
         for (let j = 0; j < boardSize; j++) {
             if (gameBoard[j][i] === 3) {
-                temparr.push([j, i]);
+                possMoves.push([j, i]);
             }
         }
     }
     if (cpuMode === 1) {
-        var rand = temparr[Math.floor(Math.random() * temparr.length)];
+        var rand = possMoves[Math.floor(Math.random() * possMoves.length)];
         playMove(rand[0], rand[1], "" + rand[0] + rand[1]);        
     }
     else if(cpuMode === 2) {
         var maxMovesArr = [];
-        for (let i = 0; i < temparr.length; i++) {
-            maxMovesArr.push(countMaxFlips(temparr[i][0],temparr[i][1]));
-            //console.log(temparr[i]);
-            //console.log(temparr[i][1]);
-            //console.log(temparr[i][0]);
-
-
-            
+        for (let i = 0; i < possMoves.length; i++) {
+            maxMovesArr.push(countMaxFlips(possMoves[i][0],possMoves[i][1]));
         }
+        var maxMove = 0;
+        var maxMovePos = 0;
+        for (let i = 0; i < maxMovesArr.length; i++) {
+            if (maxMovesArr[i] > maxMove) {
+                maxMove = maxMovesArr[i];
+                maxMovePos = i;
+            }
+        }
+        playMove(possMoves[maxMovePos][0], possMoves[maxMovePos][1], "" + possMoves[maxMovePos][0] + possMoves[maxMovePos][1]);
         console.log(maxMovesArr);
 
     }
