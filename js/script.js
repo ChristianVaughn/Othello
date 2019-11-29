@@ -8,6 +8,7 @@ var p1Score = 2;
 var p2Score = 2;
 var p1Color = "#000000"
 var p2Color = "#FFFFFF"
+var timerInterval = null;
 
 
 function renderLevel(tableSize) {
@@ -55,21 +56,21 @@ function countLines(x, y, dirX, dirY) {
 
     //checking if next position over is out of the board.
     if ((x + dirX < 0) || (x + dirX > boardSize - 1) || (y + dirY < 0) || (y + dirY > boardSize - 1)) {
-        return [0,false];
+        return [0, false];
     }
     if (gameBoard[x + dirX][y + dirY] === 0) {
-        return [0,false];
+        return [0, false];
     }
     if (gameBoard[x + dirX][y + dirY] === whosTurn) {
-        return [0,true];
+        return [0, true];
     }
     if (gameBoard[x + dirX][y + dirY] === oppositePlayer) {
-         var recur = countLines(x + dirX, y + dirY, dirX, dirY);
+        var recur = countLines(x + dirX, y + dirY, dirX, dirY);
         if (recur[1]) {
-            return [recur[0]+1,true];
+            return [recur[0] + 1, true];
         }
     }
-    return [0,false]; //Without this one of the countLines function calls returns undefined for every single 
+    return [0, false]; //Without this one of the countLines function calls returns undefined for every single 
 }
 
 function countMaxFlips(x, y) {
@@ -86,9 +87,9 @@ function countMaxFlips(x, y) {
 
 
 
-        var retVal = up[0]+down[0]+left[0]+right[0]+uLeft[0]+uRight[0]+dLeft[0]+dRight[0];
+        var retVal = up[0] + down[0] + left[0] + right[0] + uLeft[0] + uRight[0] + dLeft[0] + dRight[0];
         return retVal;
-        
+
     }
 
 }
@@ -105,12 +106,12 @@ function cpuRandomMove() {
     }
     if (cpuMode === 1) {
         var rand = possMoves[Math.floor(Math.random() * possMoves.length)];
-        playMove(rand[0], rand[1], "" + rand[0] + rand[1]);        
+        playMove(rand[0], rand[1], "" + rand[0] + rand[1]);
     }
-    else if(cpuMode === 2) {
+    else if (cpuMode === 2) {
         var maxMovesArr = [];
         for (let i = 0; i < possMoves.length; i++) {
-            maxMovesArr.push(countMaxFlips(possMoves[i][0],possMoves[i][1]));
+            maxMovesArr.push(countMaxFlips(possMoves[i][0], possMoves[i][1]));
         }
         var maxMove = 0;
         var maxMovePos = 0;
@@ -355,6 +356,7 @@ function playMove(x, y, cellID) {
                     /*
                     TODO: Add code here to handle ending the game 
                     */
+                    stopTimer();
                 }
             }
 
@@ -367,6 +369,26 @@ function playMove(x, y, cellID) {
 
 }
 
+function startTimer(duration, display) {
+    var timer = duration, minutes, seconds;
+    timerInterval = setInterval(function () {
+        minutes = parseInt(timer / 60, 10)
+        seconds = parseInt(timer % 60, 10);
+
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        display.textContent = minutes + ":" + seconds;
+
+        if (++timer < 0) {
+            timer = duration;
+        }
+    }, 1000);
+}
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
 function gameStart() {
     //$('#game-options').toggleClass('open');
 
@@ -376,5 +398,12 @@ function gameStart() {
     initBoardArray(boardSize);
     findMoves(whosTurn);
 
+    var display = document.querySelector('#time');
+    startTimer(0, display);
+
 
 }
+
+
+
+
