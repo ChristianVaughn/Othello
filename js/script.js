@@ -231,12 +231,12 @@ function findMoves(currentPlayer) {
                     gameBoard[j][i] = 3;
                     var possCell = document.getElementById(String(j) + String(i));
                     possCell.setAttribute('class', 'cell playable ');
-                    //if (whosTurn == 1) {
-                        //$("#game-board > table .cell.playable > .disc").css("background", p1Color);
-                    //}
-                    //else {
-                        //$("#game-board > table .cell.playable > .disc").css("background", p2Color);
-                    //}
+                    if (whosTurn == 1) {
+                        $("#game-board > table .cell.playable > .disc").css("background", p1Color);
+                    }
+                    else {
+                        $("#game-board > table .cell.playable > .disc").css("background", p2Color);
+                    }
 
                 }
 
@@ -260,8 +260,7 @@ function clearPossibleMoves() {
         for (let j = 0; j < boardSize; j++) {
             if (gameBoard[j][i] === 3) {
                 var possCell = document.getElementById(String(j) + String(i));
-                $(possCell).removeClass('cell white ');
-                $(possCell).removeClass('cell black ');
+                $("#game-board > table .cell.playable > .disc").css("background", "");
                 $(possCell).removeClass('cell playable ');
 
                 $(possCell).addClass('cell empty ');
@@ -292,7 +291,6 @@ function flipLines(currentPlayer, x, y, dirX, dirY) {
         if (flipLines(currentPlayer, x + dirX, y + dirY, dirX, dirY)) {
             var setColor = (currentPlayer == 1 ? 'black' : 'white');
             var currCell = document.getElementById(String(x + dirX) + String(y + dirY));
-            //$(possCell).addClass('cell empty ');
             currCell.setAttribute('class', 'cell ' + setColor);
             gameBoard[x + dirX][y + dirY] = whosTurn;
             return true;
@@ -360,7 +358,6 @@ function playMove(x, y, cellID) {
                     */
                 }
             }
-            //(whosTurn == 1 ? $("#game-board > table .cell.playable > .disc").css("background", p1Color) :$("#game-board > table .cell.playable > .disc").css("background", p2Color))
 
             if (whosTurn === cpuColor && cpuEnabled) {
                 setTimeout(cpuRandomMove, 500);//wait a few seconds before cpu moves
