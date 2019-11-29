@@ -10,12 +10,12 @@
 <body onload="renderLevel(8);">
 	<nav>
 		<ul>
-		  <li><a class="active" href="#home">Home</a></li>
-		  <li><a href="#news">News</a></li>
-		  <li><a href="#contact">Contact</a></li>
-		  <li><a href="#about">About</a></li>
+			<li><a href="#home">Home</a></li>
+			<li><a class="active" href="#Game">Game</a></li>
+			<li><a href="#howto">How To Play</a></li>
+			<li><a href="#about">About</a></li>
 		</ul>
-		</nav>
+	</nav>
 	<div id="main" class="container">
 		<div id="game-board">
 
@@ -35,39 +35,42 @@
 			<input checked="" class="sw2 sw2-success sw2-lg" type="checkbox" onchange="setGameMode(this.checked)">
 			<br>
 			<div class="input-color-container">
-				<input name="board-color" value="#5cb85c" class="input-color" type="color" onchange="boardColorChange(this)">
-			  </div>
-			  <br>
-			  <div class="input-color-container">
-				<input name="P1-color" value="#000000" class="input-color" type="color" onchange="p1ColorChange(this.value)">
-			  </div>
+				<input name="board-color" value="#5cb85c" class="input-color" type="color"
+					onchange="boardColorChange(this)">
+			</div>
 			<br>
 			<div class="input-color-container">
-				<input name="P2-color" value="#FFFFFF" class="input-color" type="color" onchange="p2ColorChange(this.value)">
-			  </div>	
-			  <br>
-			  <button onclick="gameStart();">start</button>
+				<input name="P1-color" value="#000000" class="input-color" type="color"
+					onchange="p1ColorChange(this.value)">
+			</div>
+			<br>
+			<div class="input-color-container">
+				<input name="P2-color" value="#FFFFFF" class="input-color" type="color"
+					onchange="p2ColorChange(this.value)">
+			</div>
+			<br>
+			<button onclick="gameStart();">start</button>
 		</section>
 		<section>
 			<table class="scoreboard">
 				<td class="block">
-				  <p >Player1</p>
+					<p>Player1</p>
 				</td>
 				<td class="block">
-				  <p id="p1Score">2</p>
+					<p id="p1Score">2</p>
 				</td>
 				<td class="block">
-				  <p ></p>
+					<p></p>
 				</td>
 				<td class="block">
-				  <p >Player2</p>
+					<p>Player2</p>
 				</td>
 				<td class="block">
-				  <p id="p2Score">2</p>
+					<p id="p2Score">2</p>
 				</td>
-			  </table>
+			</table>
 		</section>
-		
+
 
 
 	</div>

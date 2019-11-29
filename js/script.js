@@ -1,6 +1,7 @@
 var gameBoard = []; // A variable to hold a matrix representation of the game board.
 var boardSize = 8; // board size default to 8, and changes when renderLevel is called.
-var cpuEnabled = true;
+var cpuEnabled = true; //possibly replacing with cpu mode below.
+var cpuMode = 1; // 0 no cpu, 1 Random move, 2 move that flips most discs
 var cpuColor = 2; //CPU default to player2.
 var whosTurn = 1;
 var p1Score = 2;
@@ -49,6 +50,52 @@ function renderLevel(tableSize) {
         }
     }
 }
+function countLines(x, y, dirX, dirY) {
+    var oppositePlayer = (whosTurn == 1 ? 2 : 1);//Player not making a move
+
+    //checking if next position over is out of the board.
+    if ((x + dirX < 0) || (x + dirX > boardSize - 1) || (y + dirY < 0) || (y + dirY > boardSize - 1)) {
+        return 0;
+    }
+    if (gameBoard[x + dirX][y + dirY] === 0) {
+        return 0;
+    }
+    if (gameBoard[x + dirX][y + dirY] === whosTurn) {
+        return 0;
+    }
+    if (gameBoard[x + dirX][y + dirY] === oppositePlayer) {
+            return 1+(countLines(x + dirX, y + dirY, dirX, dirY));
+    }
+    return 0; //Without this one of the countLines function calls returns undefined for every single 
+}
+
+function countMaxFlips(x, y) {
+    //checking if clicked cell is a possible move.
+    if (gameBoard[x][y] === 3) {
+        var up = countLines(x, y, 0, -1);
+        var down = countLines(x, y, 0, 1);
+        var left = countLines(x, y, -1, 0);
+        var right = countLines(x, y, 1, 0);
+        var uLeft = countLines(x, y, -1, -1);
+        var uRight = countLines(x, y, 1, -1);
+        var dLeft = countLines(x, y, -1, 1);
+        var dRight = countLines(x, y, 1, 1);
+
+        console.log(up);
+        console.log(down);
+        console.log(left);
+        console.log(right);
+        console.log(uLeft);
+        console.log(uRight);
+        console.log(dLeft);
+        console.log(dRight);
+
+        var retVal = up+down+left+right+uLeft+uRight+dLeft+dRight;
+        return retVal;
+        
+    }
+
+}
 
 function cpuRandomMove() {
     var temparr = [];
@@ -60,8 +107,25 @@ function cpuRandomMove() {
             }
         }
     }
-    var rand = temparr[Math.floor(Math.random() * temparr.length)];
-    playMove(rand[0], rand[1], "" + rand[0] + rand[1]);
+    if (cpuMode === 1) {
+        var rand = temparr[Math.floor(Math.random() * temparr.length)];
+        playMove(rand[0], rand[1], "" + rand[0] + rand[1]);        
+    }
+    else if(cpuMode === 2) {
+        var maxMovesArr = [];
+        for (let i = 0; i < temparr.length; i++) {
+            maxMovesArr.push(countMaxFlips(temparr[i][0],temparr[i][1]));
+            //console.log(temparr[i]);
+            //console.log(temparr[i][1]);
+            //console.log(temparr[i][0]);
+
+
+            
+        }
+        console.log(maxMovesArr);
+
+    }
+
 
 }
 
@@ -78,7 +142,7 @@ function p2ColorChange(color) {
     p2Color = color;
     $("#game-board > table .cell.white > .disc").css("background", p2Color);
 }
-function setGameMode(mode) { 
+function setGameMode(mode) {
     cpuEnabled = mode;//Switch whos turn it is.
 }
 //A function that takes the empty gameBoard matrix defined in global and initializes it with starting board value based on passed in size.
@@ -167,12 +231,12 @@ function findMoves(currentPlayer) {
                     gameBoard[j][i] = 3;
                     var possCell = document.getElementById(String(j) + String(i));
                     possCell.setAttribute('class', 'cell playable ');
-                    if (whosTurn == 1) {
-                        $("#game-board > table .cell.playable > .disc").css("background", p1Color);
-                    }
-                    else {
-                        $("#game-board > table .cell.playable > .disc").css("background", p2Color);
-                    }
+                    //if (whosTurn == 1) {
+                        //$("#game-board > table .cell.playable > .disc").css("background", p1Color);
+                    //}
+                    //else {
+                        //$("#game-board > table .cell.playable > .disc").css("background", p2Color);
+                    //}
 
                 }
 
@@ -196,7 +260,12 @@ function clearPossibleMoves() {
         for (let j = 0; j < boardSize; j++) {
             if (gameBoard[j][i] === 3) {
                 var possCell = document.getElementById(String(j) + String(i));
-                possCell.setAttribute('class', 'cell empty ');
+                $(possCell).removeClass('cell white ');
+                $(possCell).removeClass('cell black ');
+                $(possCell).removeClass('cell playable ');
+
+                $(possCell).addClass('cell empty ');
+
                 gameBoard[j][i] = 0;
 
             }
@@ -223,6 +292,7 @@ function flipLines(currentPlayer, x, y, dirX, dirY) {
         if (flipLines(currentPlayer, x + dirX, y + dirY, dirX, dirY)) {
             var setColor = (currentPlayer == 1 ? 'black' : 'white');
             var currCell = document.getElementById(String(x + dirX) + String(y + dirY));
+            //$(possCell).addClass('cell empty ');
             currCell.setAttribute('class', 'cell ' + setColor);
             gameBoard[x + dirX][y + dirY] = whosTurn;
             return true;
@@ -302,9 +372,9 @@ function playMove(x, y, cellID) {
 }
 
 function gameStart() {
-     //$('#game-options').toggleClass('open');
-    
-    var options = document  .getElementById("game-options");
+    //$('#game-options').toggleClass('open');
+
+    var options = document.getElementById("game-options");
     options.style.display = "none";
     whosTurn = 1;
     initBoardArray(boardSize);
