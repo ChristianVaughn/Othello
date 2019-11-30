@@ -12,7 +12,9 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     // Validate username
     if(empty(trim($_POST["username"]))){
         $username_err = "Please enter a username.";
-    } else{
+    } elseif(strlen(trim($_POST["username"])) > 9){
+        $username_err = "Username must be under 10 characters.";
+    }else{
         // Prepare a select statement
         $sql = "SELECT id FROM users WHERE username = ?";
         
