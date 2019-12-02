@@ -1,3 +1,14 @@
+<?php
+// Initialize the session
+session_start();
+ 
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: php/login.php");
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -14,6 +25,9 @@
 			<li><a class="active" href="#Game">Game</a></li>
 			<li><a href="#howto">How To Play</a></li>
 			<li><a href="#about">About</a></li>
+			<li style="float:right"><a href="php/logout.php">Log Out</a></li>
+			<li style="float:right"><a href="php/reset-password.php">Account</a></li>
+
 		</ul>
 	</nav>
 	<div id="main" class="container">
@@ -54,7 +68,7 @@
 		<section>
 			<table class="scoreboard">
 				<td class="block">
-					<p>Player 1</p>
+					<p><?php echo $_SESSION['username']; ?></p>
 				</td>
 				<td class="block">
 					<p id="p1Score">2</p>
