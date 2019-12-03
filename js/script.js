@@ -1,6 +1,5 @@
 var gameBoard = []; // A variable to hold a matrix representation of the game board.
 var boardSize = 8; // board size default to 8, and changes when renderLevel is called.
-var cpuEnabled = true; //possibly replacing with cpu mode below.
 var cpuMode = 1; // 0 no cpu, 1 Random move, 2 move that flips most discs
 var cpuColor = 2; //CPU default to player2.
 var whosTurn = 1;
@@ -143,7 +142,7 @@ function p2ColorChange(color) {
     $("#game-board > table .cell.white > .disc").css("background", p2Color);
 }
 function setGameMode(mode) {
-    cpuEnabled = mode;//Switch whos turn it is.
+    cpuMode = parseInt(mode);//Switch whos turn it is.
 }
 //A function that takes the empty gameBoard matrix defined in global and initializes it with starting board value based on passed in size.
 function initBoardArray(tableSize) {
@@ -360,7 +359,7 @@ function playMove(x, y, cellID) {
                 }
             }
 
-            if (whosTurn === cpuColor && cpuEnabled) {
+            if (whosTurn === cpuColor && cpuMode != 0) {
                 setTimeout(cpuRandomMove, 500);//wait a few seconds before cpu moves
             }
         }

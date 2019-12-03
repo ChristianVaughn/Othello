@@ -40,13 +40,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 			<button onclick="renderLevel(6);">6x6</button>
 			<button onclick="renderLevel(8);">8x8</button>
 			<br>
-			<!--<select name="cars" onchange="setGameMode(this.value)">
-				<option value="true">Easy CPU Game</option>
-				<option value="true">Hard CPU Game</option>
-				<option value="false">2P Game</option>
+			<span class="custom-dropdown">
+				<select name="gamemode" onchange="setGameMode(this.value)">
+					<option value="1">Easy CPU Game</option>
+					<option value="2">Hard CPU Game</option>
+					<option value="0">2P Game</option>
 
-			</select> -->
-			<input checked="" class="sw2 sw2-success sw2-lg" type="checkbox" onchange="setGameMode(this.checked)">
+				</select> 
+			</span>
+		<!--	<input checked="" class="sw2 sw2-success sw2-lg" type="checkbox" onchange="setGameMode(this.checked)"> -->
 			<br>
 			<div class="input-color-container">
 				<input name="board-color" value="#5cb85c" class="input-color" type="color"
