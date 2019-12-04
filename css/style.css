@@ -179,7 +179,7 @@ li a:hover:not(.active) {
   align-items: center;
   border-radius: 8px;
   position: fixed;
-  top: 100%;
+  top: 120%;
   left: 50%;
   /* bring your own prefixes */
   transform: translate(-50%, -100%);

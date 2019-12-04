@@ -395,10 +395,14 @@ function gameStart() {
 
     //var options = document.getElementById("game-options");
     var $options = $('#game-options');
-
+    var $scoreoard = $('.scoreboard');
     $options.animate({'left': -500}, 500, function() {
         //$detailsCurtain.animate({'opacity': 0}, 300, function() {
             $(this).css('display', 'none');
+       // }); 
+    });
+    $scoreoard.animate({'top': '100%'}, 500, function() {
+        //$detailsCurtain.animate({'opacity': 0}, 300, function() {
        // }); 
     });
     //options.style.display = "none";
