@@ -393,8 +393,15 @@ function stopTimer() {
 function gameStart() {
     //$('#game-options').toggleClass('open');
 
-    var options = document.getElementById("game-options");
-    options.style.display = "none";
+    //var options = document.getElementById("game-options");
+    var $options = $('#game-options');
+
+    $options.animate({'left': -500}, 500, function() {
+        //$detailsCurtain.animate({'opacity': 0}, 300, function() {
+            $(this).css('display', 'none');
+       // }); 
+    });
+    //options.style.display = "none";
     whosTurn = 1;
     initBoardArray(boardSize);
     findMoves(whosTurn);

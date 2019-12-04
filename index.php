@@ -35,7 +35,7 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 		</div>
 		<br>
-		<section id="game-options" class="transition">
+		<section id="game-options" >
 			<button onclick="renderLevel(4);">4x4</button>
 			<button onclick="renderLevel(6);">6x6</button>
 			<button onclick="renderLevel(8);">8x8</button>
@@ -83,9 +83,9 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 				</td>
 			</table>
 		</section>
-		<div id="match-details-curtain" >
+		<div id="match-details-curtain" style="display:none;">
 			<div id="match-details-container">
-				<div id="title">MATCH STATISTICS</div>
+				<div id="title">Game Over</div>
 				<div id="teams-container">
 					<div class="homecomming-team flexbox-items">
 						<div class="homecomming-team logo"></div>
