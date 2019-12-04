@@ -351,10 +351,12 @@ function playMove(x, y, cellID) {
                 whosTurn = (whosTurn == 1 ? 2 : 1);//Switch whos turn it is
                 if (!findMoves(whosTurn)) {
                     console.log("gameover");
-                    alert("Game Over.\nPlease finish programming my end game function.")
                     /*
                     TODO: Add code here to handle ending the game 
                     */
+
+                    fillDetailedMatchStatistics('https://bit.ly/33QFI0R','https://bit.ly/33QFI0R','RandomCPU');
+                    showDetailedMatchStatistics();
                     stopTimer();
                 }
             }
@@ -405,4 +407,59 @@ function gameStart() {
 
 
 
+
+var $detailsContainer = $('#match-details-container');
+var $detailsCurtain = $('#match-details-curtain');
+
+
+$('#close-details').on('click', function(e) {
+    e.preventDefault();
+    closeDetailedMatchStatistics();
+});
+
+var fillDetailedMatchStatistics = function(p1Pic, p2Pic, Gamemode) {
+    $('.homecomming-team.logo').css('background-image', 'url("' + p1Pic + '")');
+
+    $('.homecomming-team.name').text($("#p1Name").text());
+
+    $('.homecomming-team.score').text($("#p1Score").text());
+
+    $('.away-team.logo').css('background-image', 'url("' + p2Pic + '")');
+
+    $('.away-team.name').text($("#p2Name").text());
+
+    $('.away-team.score').text($("#p2Score").text());
+
+    $('#date-of-match').text(Gamemode);
+    $('#time-of-match').text($("#time").text());
+    
+    var $awayTeamScoreEl = $('.away-team.score');
+    var $homeCommingTeamScoreEl = $('.homecomming-team.score');
+    var $awayTeamScore = +$awayTeamScoreEl.text();
+    var $homeCommingTeamScore = +$homeCommingTeamScoreEl.text();
+    
+    if($awayTeamScore == $homeCommingTeamScore) {
+        $($awayTeamScoreEl, $homeCommingTeamScoreEl).addClass('winner');
+    } else if($awayTeamScore > $homeCommingTeamScore) {
+        $awayTeamScoreEl.addClass('winner');
+        $homeCommingTeamScoreEl.removeClass('winner');
+    } else {
+        $awayTeamScoreEl.removeClass('winner');
+        $homeCommingTeamScoreEl.addClass('winner');
+    }
+};
+
+var showDetailedMatchStatistics = function() {
+    $detailsCurtain.css('display', 'flex').animate({'opacity': 1}, 300, function() {
+        $detailsContainer.animate({'opacity': 1}, 700);
+    });
+}
+
+var closeDetailedMatchStatistics = function() {
+    $detailsContainer.animate({'opacity': 0}, 500, function() {
+        $detailsCurtain.animate({'opacity': 0}, 300, function() {
+            $(this).css('display', 'none');
+        }); 
+    });
+}
 

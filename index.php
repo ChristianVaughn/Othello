@@ -1,11 +1,11 @@
 <?php
 // Initialize the session
 session_start();
- 
+
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
-    header("location: php/login.php");
-    exit;
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+	header("location: php/login.php");
+	exit;
 }
 ?>
 
@@ -46,23 +46,20 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 					<option value="2">Hard CPU Game</option>
 					<option value="0">2P Game</option>
 
-				</select> 
+				</select>
 			</span>
-		<!--	<input checked="" class="sw2 sw2-success sw2-lg" type="checkbox" onchange="setGameMode(this.checked)"> -->
+			<!--	<input checked="" class="sw2 sw2-success sw2-lg" type="checkbox" onchange="setGameMode(this.checked)"> -->
 			<br>
 			<div class="input-color-container">
-				<input name="board-color" value="#5cb85c" class="input-color" type="color"
-					onchange="boardColorChange(this)">
+				<input name="board-color" value="#5cb85c" class="input-color" type="color" onchange="boardColorChange(this)">
 			</div>
 			<br>
 			<div class="input-color-container">
-				<input name="P1-color" value="#000000" class="input-color" type="color"
-					onchange="p1ColorChange(this.value)">
+				<input name="P1-color" value="#000000" class="input-color" type="color" onchange="p1ColorChange(this.value)">
 			</div>
 			<br>
 			<div class="input-color-container">
-				<input name="P2-color" value="#FFFFFF" class="input-color" type="color"
-					onchange="p2ColorChange(this.value)">
+				<input name="P2-color" value="#FFFFFF" class="input-color" type="color" onchange="p2ColorChange(this.value)">
 			</div>
 			<br>
 			<button onclick="gameStart();">start</button>
@@ -70,7 +67,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 		<section>
 			<table class="scoreboard">
 				<td class="block">
-					<p><?php echo $_SESSION['username']; ?></p>
+					<p id="p1Name"><?php echo $_SESSION['username']; ?></p>
 				</td>
 				<td class="block">
 					<p id="p1Score">2</p>
@@ -82,13 +79,38 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 					<p id="p2Score">2</p>
 				</td>
 				<td class="block">
-					<p>Player 2</p>
+					<p id="p2Name">Player 2</p>
 				</td>
 			</table>
 		</section>
-
-
-
+		<div id="match-details-curtain" >
+			<div id="match-details-container">
+				<div id="title">MATCH STATISTICS</div>
+				<div id="teams-container">
+					<div class="homecomming-team flexbox-items">
+						<div class="homecomming-team logo"></div>
+						<br />
+						<div class="homecomming-team name"></div>
+					</div>
+					<div class="flexbox-items">
+						<div id="time-of-match"></div>
+						<div id="date-of-match"></div>
+						<br />
+					</div>
+					<div class="away-team flexbox-items">
+						<div class="away-team logo"></div>
+						<br />
+						<div class="away-team name"></div>
+					</div>
+				</div>
+				<div id="score-container">
+					<div class="homecomming-team score"></div>
+					<div class="away-team score"></div>
+				</div>
+				<hr id="bottom-devider" />
+				<div id="close-details"></div>
+			</div>
+		</div>
 	</div>
 
 </body>
