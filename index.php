@@ -35,10 +35,15 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 
 		</div>
 		<br>
-		<section id="game-options" >
+		<section id="game-options">
+			<p style="display: inline;color: black;">Board Size</p>
+			<br>
+			<br>
 			<button onclick="renderLevel(4);">4x4</button>
 			<button onclick="renderLevel(6);">6x6</button>
 			<button onclick="renderLevel(8);">8x8</button>
+			<br>
+			<p style="color: black;display: inline-block;">Game Mode</p>
 			<br>
 			<span class="custom-dropdown">
 				<select name="gamemode" onchange="setGameMode(this.value)">
@@ -50,14 +55,17 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 			</span>
 			<!--	<input checked="" class="sw2 sw2-success sw2-lg" type="checkbox" onchange="setGameMode(this.checked)"> -->
 			<br>
+			<p style="color: black;display: inline-block;">Board:</p>
 			<div class="input-color-container">
 				<input name="board-color" value="#5cb85c" class="input-color" type="color" onchange="boardColorChange(this)">
 			</div>
 			<br>
+			<p style="color: black;display: inline-block;">Player1:</p>
 			<div class="input-color-container">
 				<input name="P1-color" value="#000000" class="input-color" type="color" onchange="p1ColorChange(this.value)">
 			</div>
 			<br>
+			<p style="color: black;display: inline-block;">Player2:</p>
 			<div class="input-color-container">
 				<input name="P2-color" value="#FFFFFF" class="input-color" type="color" onchange="p2ColorChange(this.value)">
 			</div>
