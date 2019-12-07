@@ -117,6 +117,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $imageExists = 0;
 
         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
+        $target_file = $target_dir . $username . "." . $imageFileType;
+
         // Verify if the image file is an actual image or a fake image
         if (isset($_POST["submit"])) {
             $check = getimagesize($_FILES["fileup"]["tmp_name"]);
@@ -131,8 +133,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Verify if file already exists
         if (file_exists($target_file)) {
             //echo "<li>The file already exists.</li>";
+            unlink($target_file);
             $imageExists = 1; 
-            $uploadOk = 0;
+            $uploadOk = 1;
         }
         // Verify the file size
         if ($_FILES["fileup"]["size"] > 500000) {
@@ -150,7 +153,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //echo "<li>The file was not uploaded.</li>";
         } else { // upload file
             if (move_uploaded_file($_FILES["fileup"]["tmp_name"], $target_file)) {
-                $pfp = basename($_FILES["fileup"]["name"]);
+                $pfp = $username . "." . $imageFileType;
                 //echo "<li>The file " . basename($_FILES["fileup"]["name"]) . " has been uploaded.</li>";
             } else {
                 //echo "<li>Error uploading your file.</li>";
