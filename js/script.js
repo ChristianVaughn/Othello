@@ -396,7 +396,7 @@ function gameOver() {
     ?NAME HEADER gameresults
     score.php   
     */
-   var $username = $("#p1Name");
+   var $usernamee = $("#p1Name").text();
    var gamemode = "";
    if(cpuMode === 0) {
         gamemode = "2p Game";
@@ -407,8 +407,9 @@ function gameOver() {
    else {
         gamemode = "Hard CPU"; 
    }
-   $.post( "score.php", { username: username, gamemode: gamemode,boardsize:boardSize ,globaltimer:globalTimer,p1score:p1Score } );
-
+   var dataToSend = { username: $usernamee, gamemode: gamemode,boardsize:boardSize ,globaltimer:globalTimer,p1score:p1Score };
+   $.post( "php/score.php",dataToSend);
+   //console.log(dataToSend);
     //var ajaxArray = [username,gamemode,boardSize,globalTimer,p1Score];
 }
 function stopTimer() {
