@@ -3,7 +3,7 @@
 require_once "config.php";
  
 // Define variables and initialize with empty values
-$username = $password = $confirm_password = "";
+$username = $password = $firstname = $lastname = $age = $gender = $location = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = "";
  
 // Processing form data when form is submitted
@@ -126,6 +126,31 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
                 <input type="password" name="confirm_password" class="form-control" value="<?php echo $confirm_password; ?>">
                 <span class="help-block"><?php echo $confirm_password_err; ?></span>
             </div>
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>First Name</label>
+                <input type="text" name="firstname" class="form-control" value="<?php echo $firstname; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>   
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>Last Name</label>
+                <input type="text" name="lastname" class="form-control" value="<?php echo $lastname; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div> 
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>Age</label>
+                <input type="text" name="age" class="form-control" value="<?php echo $age; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>   
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>Gender</label>
+                <input type="text" name="gender" class="form-control" value="<?php echo $gender; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>   
+            <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">
+                <label>Location</label>
+                <input type="text" name="location" class="form-control" value="<?php echo $location; ?>">
+                <span class="help-block"><?php echo $username_err; ?></span>
+            </div>       
             <div class="form-group">
                 <input type="submit" class="btn btn-primary" value="Submit">
                 <input type="reset" class="btn btn-default" value="Reset">

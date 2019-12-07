@@ -408,9 +408,12 @@ function gameOver() {
         gamemode = "Hard CPU"; 
    }
    var dataToSend = { username: $usernamee, gamemode: gamemode,boardsize:boardSize ,globaltimer:globalTimer,p1score:p1Score };
-   $.post( "php/score.php",dataToSend);
+   $.post( "php/score.php",dataToSend,function(data, status){
+    alert("Data: " + data + "\nStatus: " + status);
+  });
    //console.log(dataToSend);
     //var ajaxArray = [username,gamemode,boardSize,globalTimer,p1Score];
+    
 }
 function stopTimer() {
     clearInterval(timerInterval);

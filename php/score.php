@@ -5,7 +5,7 @@ $uname = json_decode($_POST['username']);
 echo $uname;
 $gmode = json_decode($_POST['gamemode']);
 echo $gmode;
-$gridsize = json_decode($_POST['gridsize']);
+$gridsize = json_decode($_POST['boardsize']);
 echo $gridsize;
 $globaltimer = json_decode($_POST['globaltimer']);
 echo $globaltimer;
