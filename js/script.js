@@ -388,7 +388,7 @@ function startTimer(duration, display) {
     }, 1000);
 }
 function gameOver() {
-    fillDetailedMatchStatistics('https://bit.ly/33QFI0R','https://bit.ly/33QFI0R','RandomCPU');
+    fillDetailedMatchStatistics('https://bit.ly/33QFI0R','img/CPU.png','RandomCPU');
     showDetailedMatchStatistics();
     stopTimer();
     /*
