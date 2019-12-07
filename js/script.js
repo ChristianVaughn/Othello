@@ -388,11 +388,9 @@ function startTimer(duration, display) {
     }, 1000);
 }
 function gameOver() {
-    stopTimer();
-    var $usernamee = $("#p1Name").text();
-    var p1pfp = "profilepics/" + $usernamee + ".png";
-    fillDetailedMatchStatistics(p1pfp,'profilepics/CPU.png','RandomCPU');
+    fillDetailedMatchStatistics('https://bit.ly/33QFI0R','https://bit.ly/33QFI0R','RandomCPU');
     showDetailedMatchStatistics();
+    stopTimer();
     /*
     ! Order: Username Gamemode Gridsize gametime score pfp. 
     ?NAME HEADER gameresults
