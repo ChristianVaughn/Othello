@@ -8,6 +8,7 @@ var p2Score = 2;
 var p1Color = "#000000"
 var p2Color = "#FFFFFF"
 var timerInterval = null;
+var globalTimer = 0;
 
 
 function renderLevel(tableSize) {
@@ -350,14 +351,13 @@ function playMove(x, y, cellID) {
             if (!findMoves(whosTurn)) {
                 whosTurn = (whosTurn == 1 ? 2 : 1);//Switch whos turn it is
                 if (!findMoves(whosTurn)) {
+                    whosTurn = -1;
                     console.log("gameover");
                     /*
                     TODO: Add code here to handle ending the game 
                     */
-
-                    fillDetailedMatchStatistics('https://bit.ly/33QFI0R','https://bit.ly/33QFI0R','RandomCPU');
-                    showDetailedMatchStatistics();
-                    stopTimer();
+                    gameOver();
+                    
                 }
             }
 
@@ -375,6 +375,7 @@ function startTimer(duration, display) {
     timerInterval = setInterval(function () {
         minutes = parseInt(timer / 60, 10)
         seconds = parseInt(timer % 60, 10);
+        globalTimer = timer;
 
         minutes = minutes < 10 ? "0" + minutes : minutes;
         seconds = seconds < 10 ? "0" + seconds : seconds;
@@ -385,6 +386,30 @@ function startTimer(duration, display) {
             timer = duration;
         }
     }, 1000);
+}
+function gameOver() {
+    fillDetailedMatchStatistics('https://bit.ly/33QFI0R','https://bit.ly/33QFI0R','RandomCPU');
+    showDetailedMatchStatistics();
+    stopTimer();
+    /*
+    ! Order: Username Gamemode Gridsize gametime score pfp. 
+    ?NAME HEADER gameresults
+    score.php   
+    */
+   var $username = $("#p1Name");
+   var gamemode = "";
+   if(cpuMode === 0) {
+        gamemode = "2p Game";
+   }
+   else if (cpuMode === 1) {
+        gamemode = "Easy CPU";
+   } 
+   else {
+        gamemode = "Hard CPU"; 
+   }
+   $.post( "score.php", { username: username, gamemode: gamemode,boardsize:boardSize ,globaltimer:globalTimer,p1score:p1Score } );
+
+    //var ajaxArray = [username,gamemode,boardSize,globalTimer,p1Score];
 }
 function stopTimer() {
     clearInterval(timerInterval);
