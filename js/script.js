@@ -387,6 +387,13 @@ function startTimer(duration, display) {
         }
     }, 1000);
 }
+function obtainPFP() {
+    var $usernamee = $("#p1Name").text();
+    $.get( "php/getPFP.php", { username: $usernamee } )
+  .done(function( data ) {
+    alert( "Data Loaded: " + data );
+  });
+}
 function gameOver() {
     stopTimer();
     var $usernamee = $("#p1Name").text();
@@ -395,7 +402,6 @@ function gameOver() {
     showDetailedMatchStatistics();
     /*
     ! Order: Username Gamemode Gridsize gametime score pfp. 
-    ?NAME HEADER gameresults
     score.php   
     */
    var $usernamee = $("#p1Name").text();
@@ -410,9 +416,9 @@ function gameOver() {
         gamemode = "Hard CPU"; 
    }
    var dataToSend = { username: $usernamee, gamemode: gamemode,boardsize:boardSize ,globaltimer:globalTimer,p1score:p1Score };
-   $.post( "php/score.php",dataToSend,function(data, status){
+   $.post( "php/score.php",dataToSend/*,function(data, status){
     alert("Data: " + data + "\nStatus: " + status);
-  });
+  }*/);
    //console.log(dataToSend);
     //var ajaxArray = [username,gamemode,boardSize,globalTimer,p1Score];
     
