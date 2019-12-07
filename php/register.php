@@ -5,7 +5,7 @@ require 'uploadfile.php';
 
 
 // Define variables and initialize with empty values
-$username = $password = $firstname = $lastname = $age = $gender = $location = $confirm_password = "";
+$username = $password = $firstname = $lastname = $age = $gender = $location = $pfp = $confirm_password = "";
 $username_err = $password_err = $confirm_password_err = $firstname_err = $lastname_err = $age_err = $gender_err = $location_err = $pfp_error = "";
 
 // Processing form data when form is submitted
@@ -109,11 +109,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     } else {
         $location = trim($_POST["location"]);
     }
+
     //TODO upload photo thing. needs to be moved
     if (isset($_FILES["fileup"]["name"])) {
-        $target_dir = "../img/"; // you must create this directory in the folder where you have the PHP file
+        $target_dir = "../profilepics/"; // you must create this directory in the folder where you have the PHP file
         $target_file = $target_dir . basename($_FILES["fileup"]["name"]);
         $uploadOk = 1;
+        $imageExists = 0;
 
         $imageFileType = pathinfo($target_file, PATHINFO_EXTENSION);
         // Verify if the image file is an actual image or a fake image
@@ -123,33 +125,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 //echo "<li>File is an image of type - " . $check["mime"] . ".</li>";
                 $uploadOk = 1;
             } else {
-                echo "<li>File is not an image.</li>";
+                $pfp_error == "File is not an image.";
                 $uploadOk = 0;
             }
         }
         // Verify if file already exists
         if (file_exists($target_file)) {
-            echo "<li>The file already exists.</li>";
+            //echo "<li>The file already exists.</li>";
+            $imageExists = 1; 
             $uploadOk = 0;
         }
         // Verify the file size
         if ($_FILES["fileup"]["size"] > 500000) {
-            echo "<li>The file is too large.</li>";
+            $pfp_error = "<li>The file is too large.</li>";
             $uploadOk = 0;
         }
         // Verify certain file formats
         if ($imageFileType != "jpg" && $imageFileType != "png") {
-            echo "<li>Only jpg and png files are allowed for the upload.</li>";
+            $pfp_error = "<li>Only jpg and png files are allowed for the upload.</li>";
             $uploadOk = 0;
         }
         // Verify if $uploadOk is set to 0 by an error
-        if ($uploadOk == 0) {
-            echo "<li>The file was not uploaded.</li>";
+        if ($uploadOk == 0 && $imageExists == 1) {
+            $pfp = basename($_FILES["fileup"]["name"]);
+            //echo "<li>The file was not uploaded.</li>";
         } else { // upload file
             if (move_uploaded_file($_FILES["fileup"]["tmp_name"], $target_file)) {
-                echo "<li>The file " . basename($_FILES["fileup"]["name"]) . " has been uploaded.</li>";
+                $pfp = basename($_FILES["fileup"]["name"]);
+                //echo "<li>The file " . basename($_FILES["fileup"]["name"]) . " has been uploaded.</li>";
             } else {
-                echo "<li>Error uploading your file.</li>";
+                //echo "<li>Error uploading your file.</li>";
             }
         }
     }
@@ -159,11 +164,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($firstname_err) && empty($lastname_err) && empty($age_err) && empty($gender_err) && empty($location_err)&& empty($pfp_error)) {
 
         // Prepare an insert statement
-        $sql = "INSERT INTO users (username, password, firstname, lastname, age, gender, location) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO users (username, password, firstname, lastname, age, gender, location, pfp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         if ($stmt = mysqli_prepare($link, $sql)) {
             // Bind variables to the prepared statement as parameters
-            mysqli_stmt_bind_param($stmt, "sssssss", $param_username, $param_password, $param_fname, $param_lname, $param_age, $param_gender, $param_location);
+            mysqli_stmt_bind_param($stmt, "ssssssss", $param_username, $param_password, $param_fname, $param_lname, $param_age, $param_gender, $param_location, $param_pfp);
 
             // Set parameters
             $param_username = $username;
@@ -173,6 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $param_age = $age;
             $param_gender = $gender;
             $param_location = $location;
+            $param_pfp = $pfp;
 
 
             // Attempt to execute the prepared statement
