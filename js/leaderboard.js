@@ -3,6 +3,8 @@ var scoreboard = null;
 var scoreboard8= null;
 var scoreboard6 = null;
 var scoreboard4 = null;
+var decend = true; 
+var sortType = "";
 
 
 function loadScores() {
@@ -67,22 +69,66 @@ function reloadTable() {
 
 function sortList(sortby) {
     if (sortby === 0) {
-        scoreboard.sort((a, b) => (a.username > b.username) ? 1 : -1)
+        if(sortType === "username") {
+            decend = !decend;
+        }
+        else {
+            sortType = "username";
+        }
+        if(decend) {
+            scoreboard.sort((a, b) => (a.username.toLowerCase() > b.username.toLowerCase()) ? 1 : -1);
+        }
+        else {
+        scoreboard.sort((a, b) => (a.username.toLowerCase() > b.username.toLowerCase()) ? -1 : 1);
+        }
         reloadTable();
         console.log(scoreboard);
     }
     else if(sortby === 1) {
-        scoreboard.sort((a, b) => (a.gameMode > b.gameMode) ? 1 : -1)
+        if(sortType === "gameMode") {
+            decend = !decend;
+        }
+        else {
+            sortType = "gameMode";
+        }
+        if(decend) {
+            scoreboard.sort((a, b) => (a.gameMode > b.gameMode) ? 1 : -1)
+        }
+        else {
+            scoreboard.sort((a, b) => (a.gameMode > b.gameMode) ? -1 : 1)
+        }
         reloadTable();
         console.log(scoreboard);
     }
     else if(sortby === 2) {
-        scoreboard.sort((a, b) => (a.gameDuration > b.gameDuration) ? 1 : -1)
+        if(sortType === "gameDuration") {
+            decend = !decend;
+        }
+        else {
+            sortType = "gameDuration";
+        }
+        if(decend) {
+            scoreboard.sort((a, b) => (a.gameDuration > b.gameDuration) ? 1 : -1)
+        }
+        else {
+            scoreboard.sort((a, b) => (a.gameDuration > b.gameDuration) ? -1 : 1)
+        }
         reloadTable();
         console.log(scoreboard);
     }
     else if(sortby === 3) {
-        scoreboard.sort((a, b) => (a.score > b.score) ? 1 : -1)
+        if(sortType === "score") {
+            decend = !decend;
+        }
+        else {
+            sortType = "score";
+        }
+        if(decend) {
+            scoreboard.sort((a, b) => (a.score > b.score) ? 1 : -1)
+        }
+        else {
+            scoreboard.sort((a, b) => (a.score > b.score) ? -1 : 1)
+        }
         reloadTable();
         console.log(scoreboard);
     }
