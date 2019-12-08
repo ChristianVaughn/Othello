@@ -199,6 +199,9 @@ li a:hover:not(.active) {
   vertical-align: middle;
   margin: 10px; /* demo only */
 }
+.large {
+  font-size: 1.4em;
+}
 
 .custom-dropdown select {
   background-color: #5CB85C;

@@ -35,17 +35,24 @@ $userN = $_SESSION["username"];
 </header>
 
 <body onload="loadScores();">
-<button style="color:black;" onclick="switchCat(4);">4x4</button>
-<button style="color:black;" onclick="switchCat(6);">6x6</button>
-<button style="color:black;" onclick="switchCat(8);">8x8</button>
+  <span class="custom-dropdown large">
+				<select name="gamemode" onchange="switchCat(this.value);">
+					<option value="4">4x4 Grid</option>
+					<option value="6">6x6 Grid</option>
+					<option value="8">8x8 Grid</option>
+
+				</select>
+			</span>
   <section>
+
   <table id="scoreTable" width=100%>
-    <tr>
+    <thead><tr><th class ="tablehead"><p>4x4 Grid<p></th></tr></thead>
+    <tr class=" colheader">
       <th>Id</th>
-      <th onclick="sortList(0);">Player</th>
-      <th onclick="sortList(1);">Game Mode</th>
-      <th onclick="sortList(2);">Game Duration</th>
-      <th onclick="sortList(3);">Score</th>
+      <th onclick="sortList(0);"><h4>Player</h4></th>
+      <th onclick="sortList(1);"><h4>Game Mode<h4></th>
+      <th onclick="sortList(2);"><h4>Game Duration<h4></th>
+      <th onclick="sortList(3);"><h4>Score<h4></th>
     </tr>
   </section>
 

@@ -1,8 +1,9 @@
-var tableHead =  '<tr><th>Id</th><th onclick="sortList(0);">Player</th><th onclick="sortList(1);">Game Mode</th><th onclick="sortList(2);">Game Duration</th><th onclick="sortList(3);">Score</th></tr>'
+var tableHead =  '<thead><tr><th class ="tablehead" colspan="5"><h2 id=scoreHead>4x4 Grid<h2></th></tr></thead><tr class="colheader"><th><h4>Id</h4></th><th onclick="sortList(0);"><h4>Player</h4></th><th onclick="sortList(1);"><h4>Game Mode</h4></th><th onclick="sortList(2);"><h4>Game Duration</h4></th><th onclick="sortList(3);"><h4>Score</h4></th></tr>'
 var scoreboard = null;
 var scoreboard8= null;
 var scoreboard6 = null;
 var scoreboard4 = null;
+
 var decend = true; 
 var sortType = "";
 
@@ -137,16 +138,21 @@ function sortList(sortby) {
 }
 
 function switchCat(category) {
-    if (category === 4) {
+    if (category === "4") {
         scoreboard = scoreboard4;
         reloadTable();
+        $("#scoreHead").text("4x4 Grid");
     }
-    else if (category === 6) {
+    else if (category === "6") {
         scoreboard = scoreboard6;
         reloadTable();
+        $("#scoreHead").text("6x6 Grid");
+
     }
-    else if (category === 8) {
+    else if (category === "8") {
         scoreboard = scoreboard8;
         reloadTable();
+        $("#scoreHead").text("8x8 Grid");
+
     }
 }
