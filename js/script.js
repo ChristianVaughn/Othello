@@ -387,7 +387,9 @@ function startTimer(duration, display) {
         }
     }, 1000);
 }
-function obtainPFP() {
+
+function gameOver() {
+    stopTimer();
     var $usernamee = $("#p1Name").text();
     $.get( "php/getPFP.php", { username: $usernamee } )
   .done(function( data ) {
@@ -395,16 +397,7 @@ function obtainPFP() {
     var pfpPath = "profilepics/" + pfp[0]['pfp']; 
     fillDetailedMatchStatistics(pfpPath,'profilepics/CPU.png','RandomCPU');
     showDetailedMatchStatistics();
-    
-
-  });
-  
-}
-function gameOver() {
-    stopTimer();
-    obtainPFP();
-
-    /*
+/*
     ! Order: Username Gamemode Gridsize gametime score pfp. 
     score.php   
     */
@@ -419,10 +412,13 @@ function gameOver() {
    else {
         gamemode = "Hard CPU"; 
    }
-   var dataToSend = { username: $usernamee, gamemode: gamemode,boardsize:boardSize ,globaltimer:globalTimer,p1score:p1Score };
+   var dataToSend = { username: $usernamee, gamemode: gamemode,boardsize:boardSize ,globaltimer:globalTimer,p1score:p1Score,profilepic:pfpPath };
    $.post( "php/score.php",dataToSend/*,function(data, status){
     alert("Data: " + data + "\nStatus: " + status);
   }*/);
+  });
+
+    
     
 }
 function stopTimer() {
