@@ -95,25 +95,25 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 			<div id="match-details-container">
 				<div id="title">Game Over</div>
 				<div id="teams-container">
-					<div class="homecomming-team flexbox-items">
-						<div class="homecomming-team logo"></div>
+					<div class="play1 flexbox-items">
+						<div class="play1 logo"></div>
 						<br />
-						<div class="homecomming-team name"></div>
+						<div class="play1 name"></div>
 					</div>
 					<div class="flexbox-items">
-						<div id="time-of-match"></div>
-						<div id="date-of-match"></div>
+						<div id="matchTime"></div>
+						<div id="matchMode"></div>
 						<br />
 					</div>
-					<div class="away-team flexbox-items">
-						<div class="away-team logo"></div>
+					<div class="play2 flexbox-items">
+						<div class="play2 logo"></div>
 						<br />
-						<div class="away-team name"></div>
+						<div class="play2 name"></div>
 					</div>
 				</div>
 				<div id="score-container">
-					<div class="homecomming-team score"></div>
-					<div class="away-team score"></div>
+					<div class="play1 score"></div>
+					<div class="play2 score"></div>
 				</div>
 				<hr id="bottom-devider" />
 				<div id="close-details"></div>

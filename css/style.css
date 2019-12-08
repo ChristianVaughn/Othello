@@ -331,12 +331,12 @@ li a:hover:not(.active) {
   font-size: 1.2em;
 }
 
-#date-of-match {
+#matchMode {
   width: 100%;
   text-align: center;
 }
 
-#time-of-match {
+#matchTime {
   width: 100%;
   text-align: center;
   font-size: 2em;
@@ -433,3 +433,4 @@ li a:hover:not(.active) {
 #close-details::after {
   margin-top: -2px;
   transform: rotate(-45deg);
+}

@@ -391,13 +391,19 @@ function obtainPFP() {
     var $usernamee = $("#p1Name").text();
     $.get( "php/getPFP.php", { username: $usernamee } )
   .done(function( data ) {
-    alert( "Data Loaded: " + data );
+    var pfp = JSON.parse(data);
+    var pfpPath = "profilepics/" + pfp[0]['pfp']; 
+    fillDetailedMatchStatistics(pfpPath,'profilepics/CPU.png','RandomCPU');
+    showDetailedMatchStatistics();
+    
+
   });
+  
 }
 function gameOver() {
-    fillDetailedMatchStatistics('https://bit.ly/33QFI0R','https://bit.ly/33QFI0R','RandomCPU');
-    showDetailedMatchStatistics();
     stopTimer();
+    obtainPFP();
+
     /*
     ! Order: Username Gamemode Gridsize gametime score pfp. 
     score.php   
@@ -417,8 +423,6 @@ function gameOver() {
    $.post( "php/score.php",dataToSend/*,function(data, status){
     alert("Data: " + data + "\nStatus: " + status);
   }*/);
-   //console.log(dataToSend);
-    //var ajaxArray = [username,gamemode,boardSize,globalTimer,p1Score];
     
 }
 function stopTimer() {
@@ -464,34 +468,34 @@ $('#close-details').on('click', function(e) {
 });
 
 var fillDetailedMatchStatistics = function(p1Pic, p2Pic, Gamemode) {
-    $('.homecomming-team.logo').css('background-image', 'url("' + p1Pic + '")');
+    $('.play1.logo').css('background-image', 'url("' + p1Pic + '")');
 
-    $('.homecomming-team.name').text($("#p1Name").text());
+    $('.play1.name').text($("#p1Name").text());
 
-    $('.homecomming-team.score').text($("#p1Score").text());
+    $('.play1.score').text($("#p1Score").text());
 
-    $('.away-team.logo').css('background-image', 'url("' + p2Pic + '")');
+    $('.play2.logo').css('background-image', 'url("' + p2Pic + '")');
 
-    $('.away-team.name').text($("#p2Name").text());
+    $('.play2.name').text($("#p2Name").text());
 
-    $('.away-team.score').text($("#p2Score").text());
+    $('.play2.score').text($("#p2Score").text());
 
-    $('#date-of-match').text(Gamemode);
-    $('#time-of-match').text($("#time").text());
+    $('#matchMode').text(Gamemode);
+    $('#matchTime').text($("#time").text());
     
-    var $awayTeamScoreEl = $('.away-team.score');
-    var $homeCommingTeamScoreEl = $('.homecomming-team.score');
-    var $awayTeamScore = +$awayTeamScoreEl.text();
-    var $homeCommingTeamScore = +$homeCommingTeamScoreEl.text();
+    var $play2ScoreEl = $('.play2.score');
+    var $play1ScoreEl = $('.play1.score');
+    var $play2Score = +$play2ScoreEl.text();
+    var $play1Score = +$play1ScoreEl.text();
     
-    if($awayTeamScore == $homeCommingTeamScore) {
-        $($awayTeamScoreEl, $homeCommingTeamScoreEl).addClass('winner');
-    } else if($awayTeamScore > $homeCommingTeamScore) {
-        $awayTeamScoreEl.addClass('winner');
-        $homeCommingTeamScoreEl.removeClass('winner');
+    if($play2Score == $play1Score) {
+        $($play2ScoreEl, $play1ScoreEl).addClass('winner');
+    } else if($play2Score > $play1Score) {
+        $play2ScoreEl.addClass('winner');
+        $play1ScoreEl.removeClass('winner');
     } else {
-        $awayTeamScoreEl.removeClass('winner');
-        $homeCommingTeamScoreEl.addClass('winner');
+        $play2ScoreEl.removeClass('winner');
+        $play1ScoreEl.addClass('winner');
     }
 };
 
