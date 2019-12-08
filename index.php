@@ -21,8 +21,8 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
 <body onload="renderLevel(8);">
 	<nav>
 		<ul>
-			<li><a href="pPage.php">Home</a></li>
-			<li><a class="active" href="#Game">Game</a></li>
+			<li><a href="leaderboard.php">Home</a></li>
+			<li><a class="active" href="index.php">Game</a></li>
 			<li><a href="howto.php">How To Play</a></li>
 			<li><a href="#about">About</a></li>
 			<li style="float:right"><a href="php/logout.php">Log Out</a></li>

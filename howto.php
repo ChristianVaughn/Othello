@@ -9,12 +9,12 @@
 </head>
 <nav>
   <ul>
-    <li><a href="pPage.php" style="color:black;">Home</a></li>
-    <li><a href="index.php" style="color:black;">Game</a></li>
-    <li><a href="howto.php" style="color:black;">How To Play</a></li>
-    <li><a href="#about" style="color:black;">About</a></li>
-    <li style="float:right"><a href="php/logout.php" style="color:black;">Log Out</a></li>
-    <li style="float:right"><a href="php/reset-password.php" style="color:black;">Account</a></li>
+  <li><a href="leaderboard.php" >Home</a></li>
+    <li><a href="index.php" >Game</a></li>
+    <li><a class="active" href="howto.php" >How To Play</a></li>
+    <li><a href="#about" >About</a></li>
+    <li style="float:right"><a href="php/logout.php" >Log Out</a></li>
+    <li style="float:right"><a href="php/reset-password.php">Account</a></li>
 
   </ul>
 </nav>
@@ -28,7 +28,7 @@
     Each player gets discs according to board size.</p>
   <p style="color:black;" >This game offers the option to slect different board sizes,
     and alternate between CPU diffulty levels or allowing a second Player to play against you!</p>
-  <img src="othello setup.gif" alt="Italian Trulli" align="middle">
+  <img src="./img/othello setup.gif" alt="Italian Trulli" align="middle">
 </div>
 <h2 style="color:black;">Rules:</h2>
 <button type="button" class="collapsible">Moving Pieces</button>
@@ -37,7 +37,7 @@
     A move is made by placing a disc of the player's color on the board in a position that "out-flanks" one or more of the opponent's discs.
     A disc or row of discs is outflanked when it is surrounded at the ends by discs of the opposite color.
     A disc may outflank any number of discs in one or more rows in any direction (horizontal, vertical, diagonal).</p>
-  <img src="othello play1.gif" alt="Italian Trulli">
+  <img src="./img/othello play1.gif" alt="Italian Trulli">
   <p style="color:black;" >All the discs which are outflanked will be flipped, even if it is to the player's advantage not to flip them.
     Discs may only be outflanked as a direct result of a move and must fall in the direct line of the disc being played.
     If you can't outflank and flip at least one opposing disc, you must pass your turn. However, if a move is available to you, you can't forfeit your turn.</p>
@@ -48,7 +48,7 @@
   <p style="color:black;" >When it is no longer possible for either player to move, the game is over.
     The discs are now counted and the player with the majority of his or her color discs on the board is the winner.
     A tie is possible.</p>
-    <img src="othello end.gif" alt="Italian Trulli">
+    <img src="./img/othello end.gif" alt="Italian Trulli">
 </div>
 
 </body>

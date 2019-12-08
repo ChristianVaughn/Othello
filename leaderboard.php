@@ -20,21 +20,19 @@ $userN = $_SESSION["username"];
 </head>
 <nav>
   <ul>
-    <li><a href="#home" style="color:black;">Home</a></li>
-    <li><a href="index.php" style="color:black;">Game</a></li>
-    <li><a href="howto.php" style="color:black;">How To Play</a></li>
-    <li><a href="#about" style="color:black;">About</a></li>
-    <li style="float:right"><a href="php/logout.php" style="color:black;">Log Out</a></li>
-    <li style="float:right"><a href="php/reset-password.php" style="color:black;">Account</a></li>
+    <li><a href="leaderboard.php" class="active">Home</a></li>
+    <li><a href="index.php" >Game</a></li>
+    <li><a href="howto.php" >How To Play</a></li>
+    <li><a href="#about" >About</a></li>
+    <li style="float:right"><a href="php/logout.php" >Log Out</a></li>
+    <li style="float:right"><a href="php/reset-password.php">Account</a></li>
   </ul>
 </nav>
-<header>
-  <img src="default.png" alt="" align="middle" height= 100px;>
-  <p style="color:black;">profile img goes here...</p>
+<header class="page-header">
+  <br>
+  <h1 style="color:black" >Hello, <b><?php echo $userN; ?></b>. Welcome Back.</h1>
 </header>
-<div class="page-header">
-    <h1 style="color:black" >Hello, <b><?php echo $userN; ?></b>. Welcome Back.</h1>
-</div>
+
 <body onload="loadScores();">
 <button style="color:black;" onclick="switchCat(4);">4x4</button>
 <button style="color:black;" onclick="switchCat(6);">6x6</button>
