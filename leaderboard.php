@@ -36,15 +36,17 @@ $userN = $_SESSION["username"];
     <h1 style="color:black" >Hello, <b><?php echo $userN; ?></b>. Welcome Back.</h1>
 </div>
 <body onload="loadScores();">
+<button style="color:black;" onclick="switchCat(4);">4x4</button>
+<button style="color:black;" onclick="switchCat(6);">6x6</button>
+<button style="color:black;" onclick="switchCat(8);">8x8</button>
   <section>
   <table id="scoreTable" width=100%>
     <tr>
       <th>Id</th>
-      <th>Player</th>
-      <th>Game Mode</th>
-      <th>Board Size</th>
-      <th>Game Duration</th>
-      <th>Score</th>
+      <th onclick="sortList(0);">Player</th>
+      <th onclick="sortList(1);">Game Mode</th>
+      <th onclick="sortList(2);">Game Duration</th>
+      <th onclick="sortList(3);">Score</th>
     </tr>
   </section>
 
