@@ -18,6 +18,8 @@ $globaltimer = ($_POST['globaltimer']);
 echo $globaltimer;
 $p1score = ($_POST['p1score']);
 echo $p1score;
+$profilepic = ($_POST['profilepic']);
+echo $profilepic;
 }
 
 // Create connection
@@ -27,8 +29,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-$sql = "INSERT INTO games (username, gameMode, gridSize, gameDuration, score)
-VALUES ('$uname', '$gmode', $gridsize, $globaltimer, $p1score )";
+$sql = "INSERT INTO games (username, gameMode, gridSize, gameDuration, score, profilePicture)
+VALUES ('$uname', '$gmode', $gridsize, $globaltimer, $p1score, '$profilepic' )";
 
 if ($conn->query($sql) === TRUE) {
     echo "New record created successfully";
