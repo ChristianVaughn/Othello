@@ -10,6 +10,13 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 $userN = $_SESSION["username"];
 $userP = "profilepics/$userN.png";
 echo $userP;
+if( $_POST["BoardSize"] || $_POST["category"] || $_POST["order"] ){
+  echo "Sort by ". $_POST['BoardSize']. "<br />";
+  echo "Using ". $_POST['category']. " in " . $_POST["order"]. " order.";
+}
+$bSize = ($_POST['BoardSize']);
+$category = ($_POST['category']);
+$order = ($_POST['order']);
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,7 +55,7 @@ echo $userP;
 </head>
 <nav>
   <ul>
-    <li><a href="#home" style="color:black;">Home</a></li>
+    <li><a href="pPage.php" style="color:black;">Home</a></li>
     <li><a href="index.php" style="color:black;">Game</a></li>
     <li><a href="howto.php" style="color:black;">How To Play</a></li>
     <li><a href="#about" style="color:black;">About</a></li>
@@ -66,7 +73,7 @@ echo $userP;
 <body style="color:black">
   <h2 >Select Element to Sort By</h2>
 <p >The select element defines a drop-down list:</p>
-  <form action="pPage1.php" method = "POST">
+  <form method = "POST">
   <select name="BoardSize">
     <option value="4">4</option>
     <option value="6">6</option>
@@ -105,16 +112,73 @@ die("Connection failed: " . $conn->connect_error);
 }
 $userN = $_SESSION["username"];
 //echo '$userN';
-$sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score,profilePicture FROM games WHERE username='$userN'  ORDER BY id DESC ";
+if($bSize == 4 ){
+  if($category == 'score'){
+    if($order == 'ascending'){
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score,profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score ASC ";
+    }
+    else{
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score,profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score DESC ";
+    }
+  }
+  if($category == 'time'){
+    if($order == 'ascending'){
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score,profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score ASC ";
+    }
+    else{
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score,profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score DESC ";
+    }
+  }
+}//end boardsize 4
+
+if($bSize == 6 ){
+  if($category == 'score'){
+    if($order == 'ascending'){
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score, profilePicture  FROM games WHERE gridSize='$bSize' ORDER BY score ASC ";
+    }
+    else{
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score,profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score DESC ";
+    }
+  }
+  if($category == 'time'){
+    if($order == 'ascending'){
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score,profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score ASC ";
+    }
+    else{
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score,profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score DESC ";
+    }
+  }
+}//end boardsize 6
+
+if($bSize == 8 ){
+  if($category == 'score'){
+    if($order == 'ascending'){
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score, profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score ASC ";
+    }
+    else{
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score, profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score DESC ";
+    }
+  }
+  if($category == 'time'){
+    if($order == 'ascending'){
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score ,profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score ASC ";
+    }
+    else{
+      $sql = "SELECT id, username, gameMode, gridSize, gridSize, gameDuration, score, profilePicture FROM games WHERE gridSize='$bSize' ORDER BY score DESC ";
+    }
+  }
+}//end boardsize 8
+
+
 $result = $conn->query($sql);
 if ($result->num_rows > 0) {
 // output data of each row
 while($row = $result->fetch_assoc()) {
-  if($row["profilePicture"] ==""){
-    $row["profilePicture"] = "default.png";
-  }
-  echo "<tr><td>"
-  . '<img src="' . $row["profilePicture"] . '" alt="default.png" ,width=100px, height=100px /><br>'. "</td><td>"
+if($row["profilePicture"] ==""){
+  $row["profilePicture"] = "default.png";
+}
+echo "<tr><td>"
+. '<img src="' . $row["profilePicture"] . '" alt="default.png" ,width=100px, height=100px /><br>'. "</td><td>"
 . $row["username"] . "</td><td>"
 . $row["gameMode"]. "</td> <td>"
 . $row["gridSize"]. "</td><td>"

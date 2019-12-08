@@ -1,0 +1,119 @@
+body{
+  background-image: url("reversiGrey.png");
+  margin: 0;
+  padding: 0;
+  background: #808080;
+
+}
+.title{
+  font-family: 'Merienda';
+  opacity: 0;
+  font-size: 170%;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  overflow: hidden;
+  animation: fadein 3s;
+  animation-delay: 6s;
+}
+
+.project{
+  font-family: 'Merienda';
+  opacity: 0;
+  font-size: 150%;
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  overflow: hidden;
+  animation: fadein 3s;
+  animation-delay: 3s;
+}
+
+.box{
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  overflow: hidden;
+}
+.box .b{
+  opacity: 0;
+  border-radius: 50%;
+  border-left: 4px solid ;
+  border-right: 4px solid ;
+  border-top: 4px solid transparent !important;
+  border-bottom: 4px solid transparent !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  animation: ro 3s ;
+
+}
+.box .b1{
+  border-color: #4a69bd;
+  width: 120px;
+  height: 120px;
+}
+.box .b2{
+  border-color: #f6b93b;
+  width: 100px;
+  height: 100px;
+  animation-delay: 0.2s;
+}
+.box .b3{
+  border-color: #2ecc71;
+  width: 80px;
+  height: 80px;
+  animation-delay: 0.4s;
+}
+
+.box .b4{
+  border-color: #34495e;
+  width: 60px;
+  height: 60px;
+  animation-delay: 0.6s;
+}
+
+@keyframes ro{
+  0%{
+    transform: translate(-50%,-50%) rotate(0deg);
+    opacity: 0;
+  }
+  50%{
+    transform: translate(-50%,-50%) rotate(-180deg);
+    opacity: 1;
+  }
+  100%{
+    transform: translate(-50%,-50%) rotate(0deg);
+  }
+}
+
+@keyframes fadein {
+  0%{
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
+
+@keyframes fadeout {
+  0%{
+    opacity: 1;
+  }
+  100%{
+    opacity: 0;
+  }
+}
