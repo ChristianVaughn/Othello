@@ -502,9 +502,13 @@ var showDetailedMatchStatistics = function() {
 }
 
 var closeDetailedMatchStatistics = function() {
+    location.reload();
+
     $detailsContainer.animate({'opacity': 0}, 500, function() {
         $detailsCurtain.animate({'opacity': 0}, 300, function() {
             $(this).css('display', 'none');
+
+
         }); 
     });
 }

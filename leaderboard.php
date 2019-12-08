@@ -30,7 +30,6 @@ $userN = $_SESSION["username"];
 </nav>
 <header class="page-header">
   <br>
-  <img src="./img/logo.png" height=200px>
   <h1 style="color:black" >Hello, <b><?php echo $userN; ?></b>. Welcome Back.</h1>
 </header>
 
