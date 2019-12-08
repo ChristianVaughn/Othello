@@ -9,9 +9,9 @@
 </head>
 <nav>
   <ul>
-    <li><a href="#home" style="color:black;">Home</a></li>
+    <li><a href="pPage.php" style="color:black;">Home</a></li>
     <li><a href="index.php" style="color:black;">Game</a></li>
-    <li><a href="howto.html" style="color:black;">How To Play</a></li>
+    <li><a href="howto.php" style="color:black;">How To Play</a></li>
     <li><a href="#about" style="color:black;">About</a></li>
     <li style="float:right"><a href="php/logout.php" style="color:black;">Log Out</a></li>
     <li style="float:right"><a href="php/reset-password.php" style="color:black;">Account</a></li>
@@ -22,9 +22,9 @@
   <br>
   <br>
   <h2 style="color:black;">How to Play</h2>
-<button type="button" class="collapsible">Othello Game Setup</button>
+<button type="button" class="collapsible">Reversi Game Setup</button>
 <div class="content">
-  <p style="color:black;" >Othello is a strategy board game played between 2 players. One player plays black and the other white.
+  <p style="color:black;" >Reversi is a strategy board game played between 2 players. One player plays black and the other white.
     Each player gets discs according to board size.</p>
   <p style="color:black;" >This game offers the option to slect different board sizes,
     and alternate between CPU diffulty levels or allowing a second Player to play against you!</p>
