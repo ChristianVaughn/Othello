@@ -39,7 +39,7 @@
   <li>PHP - a general-purpose programming language originally designed for web development.</li>
 </div>
 <h2 >About Us</h2>
-<button type="button" class="collapsible">Cvaughn</button>
+<button type="button" class="collapsible">Christian V.</button>
 <div class="content">
   <p>Education</p>
   <li>stuff....</li><br>
@@ -47,21 +47,19 @@
   <p>Programming Experience</p>
   <li>stuff </li><br>
   <li>stuff   </li><br>
-  <p>github</p>
-  <a href="">
-  <img src="https://bit.ly/2DZT7ZW" alt="HTML tutorial" style="width:150px;height:100px;border:0">
+  <a href="https://github.com/cvaughn55">
+  <img src="./img/ghub.png" alt="HTML tutorial" style="width:75px;height:75px;border:0">
   </a>
 </div>
-<button type="button" class="collapsible">Andym</button>
+<button type="button" class="collapsible">Andy M.</button>
 <div style="color:black;" class="content">
   <p>Education</p>
   <li>AST in Computer Science</li><br>
 
   <p>Programming Experience</p>
   <li>C++  </li><br>
-  <p>github</p>
   <a href="https://github.com/acmoua">
-  <img src="https://bit.ly/2DZT7ZW" alt="HTML tutorial" style="width:150px;height:100px;border:0">
+  <img src="./img/ghub.png" alt="HTML tutorial" style="width:75px;height:75px;border:0">
 </a>
 </div>
 

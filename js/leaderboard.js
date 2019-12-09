@@ -3,7 +3,7 @@ var scoreboard = null;
 var scoreboard8= null;
 var scoreboard6 = null;
 var scoreboard4 = null;
-
+var cat = "4x4 Grid";
 var decend = true; 
 var sortType = "";
 
@@ -83,6 +83,8 @@ function sortList(sortby) {
         scoreboard.sort((a, b) => (a.username.toLowerCase() > b.username.toLowerCase()) ? -1 : 1);
         }
         reloadTable();
+        $("#scoreHead").text(cat);
+
         console.log(scoreboard);
     }
     else if(sortby === 1) {
@@ -99,6 +101,8 @@ function sortList(sortby) {
             scoreboard.sort((a, b) => (a.gameMode > b.gameMode) ? -1 : 1)
         }
         reloadTable();
+        $("#scoreHead").text(cat);
+
         console.log(scoreboard);
     }
     else if(sortby === 2) {
@@ -109,12 +113,14 @@ function sortList(sortby) {
             sortType = "gameDuration";
         }
         if(decend) {
-            scoreboard.sort((a, b) => (a.gameDuration > b.gameDuration) ? 1 : -1)
+            scoreboard.sort((a, b) => (parseInt(a.gameDuration) > parseInt(b.gameDuration)) ? 1 : -1)
         }
         else {
-            scoreboard.sort((a, b) => (a.gameDuration > b.gameDuration) ? -1 : 1)
+            scoreboard.sort((a, b) => (parseInt(a.gameDuration) > parseInt(b.gameDuration)) ? -1 : 1)
         }
         reloadTable();
+        $("#scoreHead").text(cat);
+
         console.log(scoreboard);
     }
     else if(sortby === 3) {
@@ -125,12 +131,14 @@ function sortList(sortby) {
             sortType = "score";
         }
         if(decend) {
-            scoreboard.sort((a, b) => (a.score > b.score) ? 1 : -1)
+            scoreboard.sort((a, b) => (parseInt(a.score) > parseInt(b.score)) ? 1 : -1)
         }
         else {
-            scoreboard.sort((a, b) => (a.score > b.score) ? -1 : 1)
+            scoreboard.sort((a, b) => (parseInt(a.score) > parseInt(b.score)) ? -1 : 1)
         }
         reloadTable();
+        $("#scoreHead").text(cat);
+
         console.log(scoreboard);
     }
    
@@ -140,16 +148,20 @@ function sortList(sortby) {
 function switchCat(category) {
     if (category === "4") {
         scoreboard = scoreboard4;
+        cat = "4x4 Grid";
         reloadTable();
         $("#scoreHead").text("4x4 Grid");
     }
     else if (category === "6") {
         scoreboard = scoreboard6;
+        cat = "6x6 Grid";
+
         reloadTable();
         $("#scoreHead").text("6x6 Grid");
 
     }
     else if (category === "8") {
+        cat = "8x8 Grid";
         scoreboard = scoreboard8;
         reloadTable();
         $("#scoreHead").text("8x8 Grid");
