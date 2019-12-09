@@ -12,7 +12,7 @@
   <li><a href="leaderboard.php" >Home</a></li>
     <li><a href="index.php" >Game</a></li>
     <li><a class="active" href="howto.php" >How To Play</a></li>
-    <li><a href="#about" >About</a></li>
+    <li><a href="about.php" >About</a></li>
     <li style="float:right"><a href="php/logout.php" >Log Out</a></li>
     <li style="float:right"><a href="php/reset-password.php">Account</a></li>
 

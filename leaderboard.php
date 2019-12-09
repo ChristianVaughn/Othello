@@ -26,7 +26,7 @@ $userN = $_SESSION["username"];
     <li><a href="leaderboard.php" class="active">Home</a></li>
     <li><a href="index.php" >Game</a></li>
     <li><a href="howto.php" >How To Play</a></li>
-    <li><a href="#about" >About</a></li>
+    <li><a href="about.php" >About</a></li>
     <li style="float:right"><a href="php/logout.php" >Log Out</a></li>
     <li style="float:right"><a href="php/reset-password.php">Account</a></li>
   </ul>
