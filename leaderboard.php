@@ -18,6 +18,9 @@ $userN = $_SESSION["username"];
     <link rel="stylesheet" href="./css/scoreboard.css">
 
 </head>
+
+
+<body onload="loadScores();">
 <nav>
   <ul>
     <li><a href="leaderboard.php" class="active">Home</a></li>
@@ -32,8 +35,6 @@ $userN = $_SESSION["username"];
   <br>
   <h1 style="color:black" >Hello, <b><?php echo $userN; ?></b>. Welcome Back.</h1>
 </header>
-
-<body onload="loadScores();">
   <span class="custom-dropdown large">
 				<select name="gamemode" onchange="switchCat(this.value);">
 					<option value="4">4x4 Grid</option>

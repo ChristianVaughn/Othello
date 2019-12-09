@@ -11,6 +11,10 @@ var sortType = "";
 function loadScores() {
     $.get( "php/queryLeaderboard.php", { board: '4' } )
   .done(function( data ) {
+    if(data === "Error") {
+        reloadTable();
+        return;
+    }
     scoreboard4 = JSON.parse(data);
     scoreboard = scoreboard4;
     reloadTable();
@@ -18,12 +22,19 @@ function loadScores() {
   });
   $.get( "php/queryLeaderboard.php", { board: '6' } )
   .done(function( data ) {
+      if(data === "Error") {
+          
+          return;
+      }
     scoreboard6 = JSON.parse(data);
 
     
   });
   $.get( "php/queryLeaderboard.php", { board: '8' } )
   .done(function( data ) {
+    if(data === "Error") {
+        return;
+    }
     scoreboard8 = JSON.parse(data);
 
     

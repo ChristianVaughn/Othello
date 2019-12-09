@@ -32,7 +32,7 @@ while($r = mysqli_fetch_assoc($result)) {
     echo json_encode($rows);
 }
  else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    echo "Error";
 }
 
 $conn->close();

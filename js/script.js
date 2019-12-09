@@ -395,7 +395,7 @@ function gameOver() {
   .done(function( data ) {
     var pfp = JSON.parse(data);
     var pfpPath = "profilepics/" + pfp[0]['pfp']; 
-    fillDetailedMatchStatistics(pfpPath,'profilepics/CPU.png','RandomCPU');
+    fillDetailedMatchStatistics(pfpPath,'profilepics/CPU.png');
     showDetailedMatchStatistics();
 /*
     ! Order: Username Gamemode Gridsize gametime score pfp. 
@@ -463,7 +463,8 @@ $('#close-details').on('click', function(e) {
     closeDetailedMatchStatistics();
 });
 
-var fillDetailedMatchStatistics = function(p1Pic, p2Pic, Gamemode) {
+var fillDetailedMatchStatistics = function(p1Pic, p2Pic) {
+    var Gamemode;
     $('.play1.logo').css('background-image', 'url("' + p1Pic + '")');
 
     $('.play1.name').text($("#p1Name").text());
@@ -475,7 +476,15 @@ var fillDetailedMatchStatistics = function(p1Pic, p2Pic, Gamemode) {
     $('.play2.name').text($("#p2Name").text());
 
     $('.play2.score').text($("#p2Score").text());
-
+    if (cpuMode === 0) {
+        Gamemode = "2P Game";
+    }
+    else if (cpuMode === 1) {
+        Gamemode = "Easy CPU";
+    }
+    else if (cpuMode === 2) {
+        Gamemode = "Hard CPU";
+    }
     $('#matchMode').text(Gamemode);
     $('#matchTime').text($("#time").text());
     
