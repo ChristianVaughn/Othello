@@ -9,6 +9,7 @@ var sortType = "";
 
 
 function loadScores() {
+
     $.get( "php/queryLeaderboard.php", { board: '4' } )
   .done(function( data ) {
     if(data === "Error") {
@@ -42,6 +43,66 @@ function loadScores() {
 
     
 }
+function loadUser(username) {
+    $.get( "php/queryUser.php", { user: username } )
+  .done(function( data ) {
+    if(data === "Error") {
+        return;
+    }
+    var card = document.getElementById('profileCard');
+
+    while (card.firstChild) {
+        card.removeChild(card.firstChild);
+    }
+    var userinfo = JSON.parse(data);
+    console.log(data);
+    $.each(userinfo, function(index, element) {
+        var img = document.createElement('img');
+        var name = document.createElement('h1');
+        var user = document.createElement('p');
+        var age = document.createElement('p');
+        var gender = document.createElement('p');
+        var loc = document.createElement('p');
+        var button = document.createElement('button');
+
+        img.setAttribute('src', "./profilepics/" + element.pfp);
+        img.setAttribute('alt', 'default.png');
+        img.setAttribute('style', 'width:100%');
+        user.setAttribute('class', 'title');
+        button.setAttribute('onclick', 'hideProfile();')
+
+        name.textContent = element.username;
+        user.textContent = '' + element.firstname + element.lastname;
+        age.textContent = 'Age: ' +element.age;
+        gender.textContent = 'Gender: ' +element.gender;
+        loc.textContent = 'Location: ' +element.location;
+        button.textContent = 'Close';
+
+
+        card.appendChild(img);
+        card.appendChild(name);
+        card.appendChild(user);
+        card.appendChild(age);
+        card.appendChild(gender);
+        card.appendChild(loc);
+        card.appendChild(button);
+
+
+    }); 
+    $("#profileCard").show(1000);
+    $("#cardContainer").toggleClass("parentDisable");
+
+  });
+}
+function hideProfile() {
+    $("#profileCard").hide(1000);
+    $("#cardContainer").toggleClass("parentDisable");
+    var card = document.getElementById('profileCard');
+
+    while (card.firstChild) {
+        card.removeChild(card.firstChild);
+    }
+}
 
 function reloadTable() {
     var table = document.getElementById('scoreTable');
@@ -60,10 +121,13 @@ function reloadTable() {
         var time = document.createElement('td');
 
         img.setAttribute('src', element.profilePicture);
+        img.setAttribute('onclick', "loadUser("+ "'" +element.username+"');");
+
         img.setAttribute('alt', 'default.png');
         img.setAttribute('width', '100px');
         img.setAttribute('height', '100px');
         name.textContent = element.username;
+        name.setAttribute('onclick', "loadUser("+ "'" +element.username+"');");
         mode.textContent = element.gameMode;
         time.textContent = element.gameDuration;
         score.textContent = element.score;
