@@ -43,11 +43,11 @@
   <button type="button" class="collapsible">Christian V.</button>
   <div class="content">
     <p>Education</p>
-    <li>stuff....</li><br>
+    <li>AST in Computer Science</li><br>
 
     <p>Programming Experience</p>
-    <li>stuff </li><br>
-    <li>stuff </li><br>
+    <li>C++</li><br>
+    <li>JSON manipulation with Javascript </li><br>
     <a href="https://github.com/cvaughn55">
       <img src="./img/ghub.png" alt="HTML tutorial" style="width:75px;height:75px;border:0">
     </a>

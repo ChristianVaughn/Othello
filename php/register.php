@@ -76,8 +76,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Validate lastname
     if (empty(trim($_POST["lastname"]))) {
         $lastname_err = "Please enter your last name.";
-    } elseif (strlen(trim($_POST["lastname"])) > 9) {
-        $lastname_err = "last must be under 10 characters.";
+    } elseif (strlen(trim($_POST["lastname"])) > 19) {
+        $lastname_err = "last must be under 20 characters.";
     } else {
         $lastname = trim($_POST["lastname"]);
     }
