@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (file_exists($target_file)) {
             //echo "<li>The file already exists.</li>";
             unlink($target_file);
-            $imageExists = 1; 
+            $imageExists = 1;
             $uploadOk = 1;
         }
         // Verify the file size
@@ -160,10 +160,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     }
-    
+
 
     // Check input errors before inserting in database
-    if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($firstname_err) && empty($lastname_err) && empty($age_err) && empty($gender_err) && empty($location_err)&& empty($pfp_error)) {
+    if (empty($username_err) && empty($password_err) && empty($confirm_password_err) && empty($firstname_err) && empty($lastname_err) && empty($age_err) && empty($gender_err) && empty($location_err) && empty($pfp_error)) {
 
         // Prepare an insert statement
         $sql = "INSERT INTO users (username, password, firstname, lastname, age, gender, location, pfp) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";

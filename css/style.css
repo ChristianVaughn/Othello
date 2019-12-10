@@ -1,48 +1,39 @@
 @import url("https://fonts.googleapis.com/css?family=Lato");
-
-
-
 body {
-  margin:0;
+  margin: 0;
   font-family: Arial, Helvetica, sans-serif;
   color: #FFF;
-
 }
 
-#main.container
-{
+#main.container {
   text-align: center;
 }
 
-.disabled
-{
+.disabled {
   opacity: 0.5;
 }
+
 #game-board {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   border: 2px solid #ccc;
-
   background: #ccc;
   border-radius: 0.25em;
 }
-#game-board > table
-{
+
+#game-board>table {
   margin: 0 auto;
-  
 }
 
-#game-board > table th
-{
+#game-board>table th {
   margin: 0;
   padding: 0.125em 0.25em;
   line-height: 100%;
 }
 
-#game-board > table .cell
-{
+#game-board>table .cell {
   background: #5cb85c;
   border: 1px solid #ccc;
   border-radius: .25em;
@@ -50,59 +41,57 @@ body {
   margin: 0;
   line-height: 0;
 }
-#game-board > table .cell.attackable
-{
+
+#game-board>table .cell.attackable {
   cursor: pointer;
 }
-#game-board > table .cell.attackable:hover
-{
+
+#game-board>table .cell.attackable:hover {
   background: #cc0;
 }
 
-#game-board > table .cell > .disc
-{
+#game-board>table .cell>.disc {
   display: inline-block;
   width: 3em;
   height: 3em;
   border-radius: 2em;
   margin: 0.25em;
 }
-#game-board > table .cell.white > .disc
-{
+
+#game-board>table .cell.white>.disc {
   background: #fff;
 }
-#game-board > table .cell.black > .disc
-{
+
+#game-board>table .cell.black>.disc {
   background: #000;
 }
-#game-board > table .cell.playable > .disc
-{
+
+#game-board>table .cell.playable>.disc {
   background: #F50;
   opacity: 0.2;
 }
-#game-board > table .cell.playable:hover > .disc
-{
+
+#game-board>table .cell.playable:hover>.disc {
   opacity: 1.0;
 }
+
 #game-options {
-  float:left;
+  float: left;
   position: fixed;
   top: 50%;
   /* bring your own prefixes */
   transform: translate(0%, -50%);
 }
 
-
-
 .input-color-container {
-  left:10%;
+  left: 10%;
   position: relative;
   overflow: hidden;
   width: 44px;
   height: 24px;
-border-radius: 40px;
-box-shadow: 1px 2px 2px 0px #999;
-display: inline-block;
+  border-radius: 40px;
+  box-shadow: 1px 2px 2px 0px #999;
+  display: inline-block;
 }
 
 .input-color {
@@ -113,25 +102,26 @@ display: inline-block;
   height: 56px;
   border: none;
 }
+
 #game-options {
   background-color: #f0f0f0;
   padding: 30px;
   border-radius: 5%;
-
 }
 
-
-.open{
-  left:-180px !important;
-  
+.open {
+  left: -180px !important;
 }
-.transition{
-  
--webkit-transition: left 5s ease-out;  /* Chrome 1-25, Safari 3.2+ */
-   -moz-transition: left 5s ease-out;  /* Firefox 4-15 */
-     -o-transition: left 5s ease-out;  /* Opera 10.50–12.00 */
-        transition: left 5s ease-out;  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
 
+.transition {
+  -webkit-transition: left 5s ease-out;
+  /* Chrome 1-25, Safari 3.2+ */
+  -moz-transition: left 5s ease-out;
+  /* Firefox 4-15 */
+  -o-transition: left 5s ease-out;
+  /* Opera 10.50–12.00 */
+  transition: left 5s ease-out;
+  /* Chrome 26, Firefox 16+, IE 10+, Opera 12.10+ */
 }
 
 ul {
@@ -143,6 +133,7 @@ ul {
   position: fixed;
   top: 0;
   width: 100%;
+  z-index: 999;
 }
 
 li {
@@ -160,7 +151,6 @@ li a {
 li a:hover:not(.active) {
   background-color: rgb(170, 170, 170);
   border-radius: 0.25em;
-
 }
 
 .active {
@@ -184,6 +174,7 @@ li a:hover:not(.active) {
   /* bring your own prefixes */
   transform: translate(-50%, -100%);
 }
+
 .scoreboard .block {
   text-align: center;
   height: 100%;
@@ -197,8 +188,10 @@ li a:hover:not(.active) {
   position: relative;
   display: inline-block;
   vertical-align: middle;
-  margin: 10px; /* demo only */
+  margin: 10px;
+  /* demo only */
 }
+
 .large {
   font-size: 1.4em;
 }
@@ -208,23 +201,24 @@ li a:hover:not(.active) {
   color: #fff;
   font-size: inherit;
   padding: .5em;
-  padding-right: 2.5em;	
+  padding-right: 2.5em;
   border: 0;
   margin: 0;
   border-radius: 3px;
   text-indent: 0.01px;
   text-overflow: '';
-  -webkit-appearance: button; /* hide default arrow in chrome OSX */
+  -webkit-appearance: button;
+  /* hide default arrow in chrome OSX */
 }
 
-.custom-dropdown::before,
-.custom-dropdown::after {
+.custom-dropdown::before, .custom-dropdown::after {
   content: "";
   position: absolute;
   pointer-events: none;
 }
 
-.custom-dropdown::after { /*  Custom dropdown arrow */
+.custom-dropdown::after {
+  /*  Custom dropdown arrow */
   content: "\25BC";
   height: 1em;
   font-size: .625em;
@@ -234,7 +228,8 @@ li a:hover:not(.active) {
   margin-top: -.5em;
 }
 
-.custom-dropdown::before { /*  Custom dropdown arrow cover */
+.custom-dropdown::before {
+  /*  Custom dropdown arrow cover */
   width: 2em;
   right: 0;
   top: 0;
@@ -243,22 +238,23 @@ li a:hover:not(.active) {
 }
 
 .custom-dropdown select[disabled] {
-  color: rgba(0,0,0,.3);
+  color: rgba(0, 0, 0, .3);
 }
 
 .custom-dropdown select[disabled]::after {
-  color: rgba(0,0,0,.1);
+  color: rgba(0, 0, 0, .1);
 }
 
 .custom-dropdown::before {
-  background-color: rgba(0,0,0,.15);
+  background-color: rgba(0, 0, 0, .15);
 }
 
 .custom-dropdown::after {
-  color: rgba(0,0,0,.4);
-} 
+  color: rgba(0, 0, 0, .4);
+}
 
 /* Curtain container */
+
 #match-details-curtain {
   display: flex;
   justify-content: center;
@@ -272,7 +268,9 @@ li a:hover:not(.active) {
   z-index: 500;
   opacity: 1;
 }
+
 /* Match details container */
+
 #match-details-container {
   position: relative;
   color: #F3EFF5;
@@ -280,9 +278,9 @@ li a:hover:not(.active) {
   width: 480px;
   padding: 3em 2em;
   border-radius: 6px;
-  -webkit-box-shadow: 0px 0px 17px 3px rgba(0,0,0,0.75);
-  -moz-box-shadow: 0px 0px 17px 3px rgba(0,0,0,0.75);
-  box-shadow: 0px 0px 17px 3px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 0px 0px 17px 3px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 0px 0px 17px 3px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 17px 3px rgba(0, 0, 0, 0.75);
   opacity: 1;
 }
 
@@ -368,11 +366,12 @@ li a:hover:not(.active) {
   height: 10px;
   border-radius: 50%;
   border: 2px solid #F3EFF5;
-  transform:rotate(360deg); /* for smoother circle */
-  -ms-transform:rotate(360deg);
-  -moz-transform:rotate(360deg);
-  -webkit-transform:rotate(360deg);
-  -o-transform:rotate(360deg);
+  transform: rotate(360deg);
+  /* for smoother circle */
+  -ms-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  -webkit-transform: rotate(360deg);
+  -o-transform: rotate(360deg);
 }
 
 #score-container {
@@ -425,7 +424,7 @@ li a:hover:not(.active) {
 }
 
 #close-details::before, #close-details::after {
-  content:'';
+  content: '';
   display: block;
   margin-top: 15px;
   width: 100%;

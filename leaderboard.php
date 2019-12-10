@@ -74,14 +74,15 @@ $userN = $_SESSION["username"];
   <div id="cardContainer"></div>
 
   <div class="card" id="profileCard" style='display:none'>
-  <img src="profilepics/cvaughn55.png" alt="John" style="width:100%">
-  <h1>Christian Vaughn</h1>
-  <p class="title">Cvaughn55</p>
-  <p>Age: 21</p>
-  <p>Gender: Male</p>
-  <p>Location: USA</p>
+    <img src="profilepics/cvaughn55.png" alt="John" style="width:100%">
+    <h1>Christian Vaughn</h1>
+    <p class="title">Cvaughn55</p>
+    <p>Age: 21</p>
+    <p>Gender: Male</p>
+    <p>Location: USA</p>
 
-  <button onclick="hideProfile();">Close</button></div>
+    <button onclick="hideProfile();">Close</button>
+  </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 

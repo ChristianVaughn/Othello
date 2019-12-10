@@ -37,7 +37,3 @@ while($r = mysqli_fetch_assoc($result)) {
 
 $conn->close();
 }
-
-
-
-?>

@@ -67,5 +67,3 @@ if($stmt = mysqli_prepare($link, $sql)){
 // Close statement
 mysqli_stmt_close($stmt);
 */
-
-?>

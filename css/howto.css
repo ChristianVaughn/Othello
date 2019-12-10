@@ -1,4 +1,5 @@
 /* Style the button that is used to open and close the collapsible content */
+
 .collapsible {
   background-color: #eee;
   color: #444;
@@ -12,18 +13,20 @@
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+
 .collapsible:hover:not(.active) {
-  color:white;
+  color: white;
   background-color: rgb(170, 170, 170);
   border-radius: 0.25em;
-
 }
+
 .active {
   background-color: #5CB85C;
-  color:white;
+  color: white;
 }
 
 /* Style the collapsible content. Note: hidden by default */
+
 .content {
   padding: 0 18px;
   display: none;
@@ -32,9 +35,12 @@
 }
 
 p {
-  color : black;
+  color: black;
 }
+
 ::-webkit-scrollbar {
-  width: 0px;  /* Remove scrollbar space */
-  background: transparent;  /* Optional: just make scrollbar invisible */
+  width: 0px;
+  /* Remove scrollbar space */
+  background: transparent;
+  /* Optional: just make scrollbar invisible */
 }

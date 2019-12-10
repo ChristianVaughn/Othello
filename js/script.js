@@ -357,7 +357,7 @@ function playMove(x, y, cellID) {
                     TODO: Add code here to handle ending the game 
                     */
                     gameOver();
-                    
+
                 }
             }
 
@@ -391,35 +391,35 @@ function startTimer(duration, display) {
 function gameOver() {
     stopTimer();
     var $usernamee = $("#p1Name").text();
-    $.get( "php/getPFP.php", { username: $usernamee } )
-  .done(function( data ) {
-    var pfp = JSON.parse(data);
-    var pfpPath = "profilepics/" + pfp[0]['pfp']; 
-    fillDetailedMatchStatistics(pfpPath,'profilepics/CPU.png');
-    showDetailedMatchStatistics();
-/*
-    ! Order: Username Gamemode Gridsize gametime score pfp. 
-    score.php   
-    */
-   var $usernamee = $("#p1Name").text();
-   var gamemode = "";
-   if(cpuMode === 0) {
-        gamemode = "2p Game";
-   }
-   else if (cpuMode === 1) {
-        gamemode = "Easy CPU";
-   } 
-   else {
-        gamemode = "Hard CPU"; 
-   }
-   var dataToSend = { username: $usernamee, gamemode: gamemode,boardsize:boardSize ,globaltimer:globalTimer,p1score:p1Score,profilepic:pfpPath };
-   $.post( "php/score.php",dataToSend/*,function(data, status){
+    $.get("php/getPFP.php", { username: $usernamee })
+        .done(function (data) {
+            var pfp = JSON.parse(data);
+            var pfpPath = "profilepics/" + pfp[0]['pfp'];
+            fillDetailedMatchStatistics(pfpPath, 'profilepics/CPU.png');
+            showDetailedMatchStatistics();
+            /*
+                ! Order: Username Gamemode Gridsize gametime score pfp. 
+                score.php   
+                */
+            var $usernamee = $("#p1Name").text();
+            var gamemode = "";
+            if (cpuMode === 0) {
+                gamemode = "2p Game";
+            }
+            else if (cpuMode === 1) {
+                gamemode = "Easy CPU";
+            }
+            else {
+                gamemode = "Hard CPU";
+            }
+            var dataToSend = { username: $usernamee, gamemode: gamemode, boardsize: boardSize, globaltimer: globalTimer, p1score: p1Score, profilepic: pfpPath };
+            $.post("php/score.php", dataToSend/*,function(data, status){
     alert("Data: " + data + "\nStatus: " + status);
   }*/);
-  });
+        });
 
-    
-    
+
+
 }
 function stopTimer() {
     clearInterval(timerInterval);
@@ -431,14 +431,14 @@ function gameStart() {
     //var options = document.getElementById("game-options");
     var $options = $('#game-options');
     var $scoreoard = $('.scoreboard');
-    $options.animate({'left': -500}, 500, function() {
+    $options.animate({ 'left': -500 }, 500, function () {
         //$detailsCurtain.animate({'opacity': 0}, 300, function() {
-            $(this).css('display', 'none');
-       // }); 
+        $(this).css('display', 'none');
+        // }); 
     });
-    $scoreoard.animate({'top': '100%'}, 500, function() {
+    $scoreoard.animate({ 'top': '100%' }, 500, function () {
         //$detailsCurtain.animate({'opacity': 0}, 300, function() {
-       // }); 
+        // }); 
     });
     //options.style.display = "none";
     whosTurn = 1;
@@ -458,12 +458,12 @@ var $detailsContainer = $('#match-details-container');
 var $detailsCurtain = $('#match-details-curtain');
 
 
-$('#close-details').on('click', function(e) {
+$('#close-details').on('click', function (e) {
     e.preventDefault();
     closeDetailedMatchStatistics();
 });
 
-var fillDetailedMatchStatistics = function(p1Pic, p2Pic) {
+var fillDetailedMatchStatistics = function (p1Pic, p2Pic) {
     var Gamemode;
     $('.play1.logo').css('background-image', 'url("' + p1Pic + '")');
 
@@ -487,15 +487,15 @@ var fillDetailedMatchStatistics = function(p1Pic, p2Pic) {
     }
     $('#matchMode').text(Gamemode);
     $('#matchTime').text($("#time").text());
-    
+
     var $play2ScoreEl = $('.play2.score');
     var $play1ScoreEl = $('.play1.score');
     var $play2Score = +$play2ScoreEl.text();
     var $play1Score = +$play1ScoreEl.text();
-    
-    if($play2Score == $play1Score) {
+
+    if ($play2Score == $play1Score) {
         $($play2ScoreEl, $play1ScoreEl).addClass('winner');
-    } else if($play2Score > $play1Score) {
+    } else if ($play2Score > $play1Score) {
         $play2ScoreEl.addClass('winner');
         $play1ScoreEl.removeClass('winner');
     } else {
@@ -504,21 +504,21 @@ var fillDetailedMatchStatistics = function(p1Pic, p2Pic) {
     }
 };
 
-var showDetailedMatchStatistics = function() {
-    $detailsCurtain.css('display', 'flex').animate({'opacity': 1}, 300, function() {
-        $detailsContainer.animate({'opacity': 1}, 700);
+var showDetailedMatchStatistics = function () {
+    $detailsCurtain.css('display', 'flex').animate({ 'opacity': 1 }, 300, function () {
+        $detailsContainer.animate({ 'opacity': 1 }, 700);
     });
 }
 
-var closeDetailedMatchStatistics = function() {
+var closeDetailedMatchStatistics = function () {
     location.reload();
 
-    $detailsContainer.animate({'opacity': 0}, 500, function() {
-        $detailsCurtain.animate({'opacity': 0}, 300, function() {
+    $detailsContainer.animate({ 'opacity': 0 }, 500, function () {
+        $detailsCurtain.animate({ 'opacity': 0 }, 300, function () {
             $(this).css('display', 'none');
 
 
-        }); 
+        });
     });
 }
 
