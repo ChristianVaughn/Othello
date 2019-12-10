@@ -4,125 +4,88 @@ session_start();
 
 // Check if the user is logged in, if not then redirect him to login page
 if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
-	header("location: php/login.php");
-	exit;
+  header("location: login.php");
+  exit;
 }
+$userN = $_SESSION["username"];
 ?>
-
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
-	<meta charset="UTF-8" />
-	<title>Reversi</title>
-	<link href="./css/style.css" rel="stylesheet">
+  <title>Table with database</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
+  <link href="./css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="./css/scoreboard.css">
+
 </head>
 
-<body onload="renderLevel(8);">
-	<nav>
-		<ul>
-			<li><a href="leaderboard.php">Home</a></li>
-			<li><a class="active" href="index.php">Game</a></li>
-			<li><a href="howto.php">How To Play</a></li>
-			<li><a href="about.php">About</a></li>
-			<li style="float:right"><a href="php/logout.php">Log Out</a></li>
-			<li style="float:right"><a href="php/reset-password.php">Account</a></li>
 
-		</ul>
-	</nav>
-	<div id="main" class="container">
-		<div id="game-board">
+<body onload="loadScores();">
+  <nav>
+    <ul>
+      <li><a href="index.php" class="active">Home</a></li>
+      <li><a href="game.php">Game</a></li>
+      <li><a href="howto.php">How To Play</a></li>
+      <li><a href="about.php">About</a></li>
+      <li style="float:right"><a href="php/logout.php">Log Out</a></li>
+      <li style="float:right"><a href="php/reset-password.php">Account</a></li>
+    </ul>
+  </nav>
+  <header class="page-header">
+    <br>
+    <h1 style="color:black">Hello, <b><?php echo $userN; ?></b>. Welcome Back to Othello.</h1>
+  </header>
+  <span class="custom-dropdown large">
+    <select name="gamemode" onchange="switchCat(this.value);">
+      <option value="4">4x4 Grid</option>
+      <option value="6">6x6 Grid</option>
+      <option value="8">8x8 Grid</option>
 
-		</div>
-		<br>
-		<section id="game-options">
-			<p style="display: inline;color: black;">Board Size</p>
-			<br>
-			<br>
-			<button onclick="renderLevel(4);">4x4</button>
-			<button onclick="renderLevel(6);">6x6</button>
-			<button onclick="renderLevel(8);">8x8</button>
-			<br>
-			<p style="color: black;display: inline-block;">Game Mode</p>
-			<br>
-			<span class="custom-dropdown">
-				<select name="gamemode" onchange="setGameMode(this.value)">
-					<option value="1">Easy CPU Game</option>
-					<option value="2">Hard CPU Game</option>
-					<option value="0">2P Game</option>
+    </select>
+  </span>
+  <section>
 
-				</select>
-			</span>
-			<!--	<input checked="" class="sw2 sw2-success sw2-lg" type="checkbox" onchange="setGameMode(this.checked)"> -->
-			<br>
-			<p style="color: black;display: inline-block;">Board:</p>
-			<div class="input-color-container">
-				<input name="board-color" value="#5cb85c" class="input-color" type="color" onchange="boardColorChange(this)">
-			</div>
-			<br>
-			<p style="color: black;display: inline-block;">Player1:</p>
-			<div class="input-color-container">
-				<input name="P1-color" value="#000000" class="input-color" type="color" onchange="p1ColorChange(this.value)">
-			</div>
-			<br>
-			<p style="color: black;display: inline-block;">Player2:</p>
-			<div class="input-color-container">
-				<input name="P2-color" value="#FFFFFF" class="input-color" type="color" onchange="p2ColorChange(this.value)">
-			</div>
-			<br>
-			<button onclick="gameStart();">start</button>
-		</section>
-		<section>
-			<table class="scoreboard">
-				<td class="block">
-					<p id="p1Name"><?php echo $_SESSION['username']; ?></p>
-				</td>
-				<td class="block">
-					<p id="p1Score">2</p>
-				</td>
-				<td class="block">
-					<p id="time">00:00</p>
-				</td>
-				<td class="block">
-					<p id="p2Score">2</p>
-				</td>
-				<td class="block">
-					<p id="p2Name">Player 2</p>
-				</td>
-			</table>
-		</section>
-		<div id="match-details-curtain" style="display:none;">
-			<div id="match-details-container">
-				<div id="title">Game Over</div>
-				<div id="teams-container">
-					<div class="play1 flexbox-items">
-						<div class="play1 logo"></div>
-						<br />
-						<div class="play1 name"></div>
-					</div>
-					<div class="flexbox-items">
-						<div id="matchTime"></div>
-						<div id="matchMode"></div>
-						<br />
-					</div>
-					<div class="play2 flexbox-items">
-						<div class="play2 logo"></div>
-						<br />
-						<div class="play2 name"></div>
-					</div>
-				</div>
-				<div id="score-container">
-					<div class="play1 score"></div>
-					<div class="play2 score"></div>
-				</div>
-				<hr id="bottom-devider" />
-				<div id="close-details"></div>
-			</div>
-		</div>
-	</div>
+    <table id="scoreTable" width=100%>
+      <thead>
+        <tr>
+          <th class="tablehead">
+            <p>4x4 Grid<p>
+          </th>
+        </tr>
+      </thead>
+      <tr class=" colheader">
+        <th>Id</th>
+        <th onclick="sortList(0);">
+          <h4>Player</h4>
+        </th>
+        <th onclick="sortList(1);">
+          <h4>Game Mode<h4>
+        </th>
+        <th onclick="sortList(2);">
+          <h4>Game Duration<h4>
+        </th>
+        <th onclick="sortList(3);">
+          <h4>Score<h4>
+        </th>
+      </tr>
+    </table>
+  </section>
+  <div id="cardContainer"></div>
 
+  <div class="card" id="profileCard" style='display:none'>
+    <img src="profilepics/cvaughn55.png" alt="John" style="width:100%">
+    <h1>Christian Vaughn</h1>
+    <p class="title">Cvaughn55</p>
+    <p>Age: 21</p>
+    <p>Gender: Male</p>
+    <p>Location: USA</p>
+
+    <button onclick="hideProfile();">Close</button>
+  </div>
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="js/script.js"></script>
+
+<script src="js/leaderboard.js"></script>
 
 </html>

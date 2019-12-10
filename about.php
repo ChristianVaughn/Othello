@@ -9,8 +9,8 @@
 </head>
 <nav>
   <ul>
-    <li><a href="leaderboard.php">Home</a></li>
-    <li><a href="index.php">Game</a></li>
+    <li><a href="index.php">Home</a></li>
+    <li><a href="game.php">Game</a></li>
     <li><a href="howto.php">How To Play</a></li>
     <li><a class="active" href="about.php">About</a></li>
     <li style="float:right"><a href="php/logout.php">Log Out</a></li>

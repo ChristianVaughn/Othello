@@ -93,6 +93,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <head>
     <meta charset="UTF-8">
+    <img src="../img/logo.png"  height="150px"></img>   
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.css">
     <style type="text/css">
@@ -104,12 +105,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             width: 350px;
             padding: 20px;
         }
+        img{
+            margin: 10px;
+        }
     </style>
 </head>
 
 <body>
     <div class="wrapper">
-        <h2>Login</h2>
         <p>Please fill in your credentials to login.</p>
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
             <div class="form-group <?php echo (!empty($username_err)) ? 'has-error' : ''; ?>">

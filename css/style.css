@@ -395,7 +395,7 @@ li a:hover:not(.active) {
   font-family: 'Roboto', sans-serif;
 }
 
-.away-team.score {
+.play2.score {
   float: right;
   border-right: 2px solid #F3EFF5;
   border-left: 1px solid #F3EFF5;
